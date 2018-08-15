@@ -74,28 +74,22 @@ for(Cpair in pair.vector){
           TickerResp.df$PAIRbidspread <- CandleResp.df$PAIRclose - TickerResp.df$PAIRbid
           TickerResp.df$PAIRaskspread <- TickerResp.df$PAIRask - CandleResp.df$PAIRclose
 
-         }, error = function(e) print(paste('error in ', uniqTimes[x])))
-                  }
+         }, error = function(e) print(paste('error in ', uniqTimes[x])))                  }
+                  
       tryCatch({
-        BinanceObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
-        BinanceObs$PAIRd <- BinanceObs$PAIRclose - BinanceObs$PAIRopen
-        BinanceObs$time <- uniqTimes[(x+1)]
+        BitfinexObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
+        BitfinexObs$PAIRd <- BitfinexObs$PAIRclose - BitfinexObs$PAIRopen
+        BitfinexObs$time <- uniqTimes[(x+1)]
         # newdata <- 1
         if(runnum!=1){
-          if(is.na(BinanceObs$time)){            print('NA')
-          }else{BinanceData.f <- rbind(BinanceData.f, BinanceObs)              }
-        }else{BinanceData.f <- BinanceObs}
+          if(is.na(BitfinexObs$time)){            print('NA')
+          }else{BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs) }
+        }else{BitfinexData.f <- BitfinexObs}
         runnum <- runnum +1
       }, error = function(e2) print(paste('missing data skip')) )
+               
     }
-      rm(KlinesResp.df, BookResp.df, DepthData, KlinesResp, BookResp
-  #    }
- #     BitfinexObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
-    #  BitfinexObs$time <- uniqTimes[time]
-#      if(runnum!=1){BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs)
-  #    }else{BitfinexData.f <- BitfinexObs}
- #   }
-  #  runnum <- runnum +1
+      rm(CandleResp.df, TickerResp.df, BookResp.df)
   }
   csvfolder <- paste0("bitfinex/", Cpair, "/CSV/small", Cpair, ".csv")
   fwrite(BitfinexData.f, file = csvfolder)

@@ -81,13 +81,32 @@ for(Cpair in pair.vector){
             
           }, error = function(e) print(paste('error in ', uniqTimes[time])))
         }
+              tryCatch({
         BitfinexObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
+        BitfinexObs$PAIRd <- BitfinexObs$PAIRclose - BitfinexObs$PAIRopen
         BitfinexObs$time <- uniqTimes[(x+1)]
-        if(runnum!=1){BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs)
+        # newdata <- 1
+        if(runnum!=1){
+          if(is.na(BitfinexObs$time)){            print('NA')
+          }else{BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs) }
         }else{BitfinexData.f <- BitfinexObs}
-      }
-      runnum <- runnum +1
+        runnum <- runnum +1
+      }, error = function(e2) print(paste('missing data skip')) )
+               
     }
+      rm(CandleResp.df, TickerResp.df, BookResp.df)
+  }     
+                   
+                   
+                   
+                   
+   #     BitfinexObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
+  #      BitfinexObs$time <- uniqTimes[(x+1)]
+ #       if(runnum!=1){BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs)
+ #       }else{BitfinexData.f <- BitfinexObs}
+  #    }
+#      runnum <- runnum +1
+#    }
     BitfinexData.f <- rbind(SeedData, BitfinexData.f)
     fwrite(BitfinexData.f, file = csvfolder)
   }

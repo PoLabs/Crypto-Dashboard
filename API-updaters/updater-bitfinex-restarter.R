@@ -4,6 +4,7 @@ lapply(pcklibs, require, character.only=TRUE)
 runnum <- 1
 BitfinexData.f <- data.frame(c('a', 'b'), c('c', 'd'))
 TxN.df <- data.frame(c('a', 'b'), c('c', 'd'))
+newdata <- 0
 
 pair.vector <- c('LTCUSD', 'ETHUSD', 'BTCUSD', 'EOSUSD', 'BCHUSD', 'XRPUSD')
 
@@ -26,8 +27,8 @@ for(Cpair in pair.vector){
   uniqTimes <- sort(uniqTimes, decreasing = FALSE)
   TxN.df <- data.frame(cbind(as.character(allNames), as.character(allTimes)))
   
-  for(time in 1:length(uniqTimes)){
-    position.vec <- which(TxN.df[,2] %in% uniqTimes[time])
+  for(x in 1:length(uniqTimes)){
+    position.vec <- which(TxN.df[,2] %in% uniqTimes[x])
     print(length(position.vec))
 
     if(length(position.vec) > 2){
@@ -73,14 +74,22 @@ for(Cpair in pair.vector){
           TickerResp.df$PAIRbidspread <- CandleResp.df$PAIRclose - TickerResp.df$PAIRbid
           TickerResp.df$PAIRaskspread <- TickerResp.df$PAIRask - CandleResp.df$PAIRclose
 
-         }, error = function(e) print(paste('error in ', uniqTimes[time])))
-      }
-      BitfinexObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
-      BitfinexObs$time <- uniqTimes[time]
-      if(runnum!=1){BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs)
-      }else{BitfinexData.f <- BitfinexObs}
+         }, error = function(e) print(paste('error in ', uniqTimes[x])))                  }
+                  
+      tryCatch({
+        BitfinexObs <- cbind(CandleResp.df, TickerResp.df, BookResp.df)
+        BitfinexObs$PAIRd <- BitfinexObs$PAIRclose - BitfinexObs$PAIRopen
+        BitfinexObs$time <- uniqTimes[(x+1)]
+        # newdata <- 1
+        if(runnum!=1){
+          if(is.na(BitfinexObs$time)){            print('NA')
+          }else{BitfinexData.f <- rbind(BitfinexData.f, BitfinexObs) }
+        }else{BitfinexData.f <- BitfinexObs}
+        runnum <- runnum +1
+      }, error = function(e2) print(paste('missing data skip')) )
+               
     }
-    runnum <- runnum +1
+      rm(CandleResp.df, TickerResp.df, BookResp.df)
   }
   csvfolder <- paste0("bitfinex/", Cpair, "/CSV/small", Cpair, ".csv")
   fwrite(BitfinexData.f, file = csvfolder)

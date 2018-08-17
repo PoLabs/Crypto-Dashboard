@@ -193,7 +193,7 @@ shinyServer(function(input, output){
     names(resultsA.df) <- c("Classification", "Binary", "Raw probability", "Train ROC*", "Test accuracy")
     testvector <- as.data.frame(fread(file=paste0(pairnameA, '/models/test-', pairnameA, '.csv')))
     testvector <- testvector[,which(colnames(testvector) %in% c(modelnameA, modelnameA))]
-    resultsA.df[,2] <- as.integer(resultsb.df[,2])
+    resultsA.df[,2] <- as.integer(resultsA.df[,2])
     resultsA.df[,5] <- testvector
     output$modelTableA <- renderTable(resultsA.df)#display
     remove(Alist)#clean
@@ -242,7 +242,7 @@ shinyServer(function(input, output){
     names(resultsB.df) <- c("Classification", "Binary", "Raw probability", "Train ROC*", "Test accuracy")
     testvector <- as.data.frame(fread(file=paste0(pairnameB, '/models/test-', pairnameB, '.csv')))
     testvector <- testvector[,which(colnames(testvector) %in% c(modelnameB, modelnameB))]
-    resultsB.df[,2] <- as.integer(resultsb.df[,2])
+    resultsB.df[,2] <- as.integer(resultsB.df[,2])
     resultsB.df[,5] <- testvector
     output$modelTableB <- renderTable(resultsB.df)#display
     remove(Blist)#clean

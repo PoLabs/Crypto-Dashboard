@@ -106,12 +106,18 @@ shinyServer(function(input, output){
   output$textout1 <- renderText({
     pairA.df <- pairA()
     n <- input$varselectA
-    Atext <- paste0(input$pairAInput, ': ', n, ' currently at ', as.character(pairA.df[nrow(pairA.df),n]))  })    # current text A
+    if(n %in% c('raw.sent','comment.sent')){
+      nlpA.df <- nlpA()
+      Atext <- paste0(input$pairAInput, ': ', n, ' currently at ', as.character(nlpA.df[nrow(nlpA.df),n]))
+    }else{    Atext <- paste0(input$pairAInput, ': ', n, ' currently at ', as.character(pairA.df[nrow(pairA.df),n]))}  })    # current text A
   
   output$textout2 <- renderText({
     pairB.df <- pairB()
     n <- input$varselectB
-    Btext <- paste0(input$pairBInput, ': ', n, ' currently at ', as.character(pairB.df[nrow(pairB.df),n]))  })   #current text B
+    if(n %in% c('raw.sent','comment.sent')){
+      nlpB.df <- nlpB()
+      Btext <- paste0(input$pairBInput, ': ', n, ' currently at ', as.character(nlpB.df[nrow(nlpB.df),n]))
+    }else{    Btext <- paste0(input$pairBInput, ': ', n, ' currently at ', as.character(pairB.df[nrow(pairB.df),n]))}  })    # current text A
   
   output$NLPplot1 <- renderPlot({
     exUIA <- exchangeA()
@@ -184,10 +190,11 @@ shinyServer(function(input, output){
        }else{resultsA.df[c,3] <- as.double(max(Alist[[c]]$results$ROC))   }  
       }
     resultsA.df <- cbind(c('24hr 0.5% increase:  ','24hr 1% increase:  ','24hr 2% increase:  ','24hr 0.5% decrease:  ','24hr 1% decrease:  ','24hr 2% decrease:  '), resultsA.df)
-    names(resultsA.df) <- c("Classification", "bin", "raw", "train", "test")
+    names(resultsA.df) <- c("Classification", "Binary", "Raw probability", "Train ROC*", "Test accuracy")
     testvector <- as.data.frame(fread(file=paste0(pairnameA, '/models/test-', pairnameA, '.csv')))
     testvector <- testvector[,which(colnames(testvector) %in% c(modelnameA, modelnameA))]
-    resultsA.df$test <- testvector
+    resultsA.df[,2] <- as.integer(resultsb.df[,2])
+    resultsA.df[,5] <- testvector
     output$modelTableA <- renderTable(resultsA.df)#display
     remove(Alist)#clean
   })    #model A go
@@ -232,10 +239,11 @@ shinyServer(function(input, output){
       }else{resultsB.df[c,3] <- as.double(max(Blist[[c]]$results$ROC))    }  
     }
     resultsB.df <- cbind(c('24hr 0.5% increase:  ','24hr 1% increase:  ','24hr 2% increase:  ','24hr 0.5% decrease:  ','24hr 1% decrease:  ','24hr 2% decrease:  '), resultsB.df)
-    names(resultsB.df) <- c("Classification", "bin", "raw", "train", "test")
+    names(resultsB.df) <- c("Classification", "Binary", "Raw probability", "Train ROC*", "Test accuracy")
     testvector <- as.data.frame(fread(file=paste0(pairnameB, '/models/test-', pairnameB, '.csv')))
     testvector <- testvector[,which(colnames(testvector) %in% c(modelnameB, modelnameB))]
-    resultsB.df$test <- testvector
+    resultsB.df[,2] <- as.integer(resultsb.df[,2])
+    resultsB.df[,5] <- testvector
     output$modelTableB <- renderTable(resultsB.df)#display
     remove(Blist)#clean
   })     #model B go

@@ -11,7 +11,7 @@ shinyUI(fluidPage(
              zoom: 0.8; /* Other non-webkit browsers */
              zoom: 80%; /* Webkit browsers */      }       "),
   
-  dashboardPage(skin="black",
+  dashboardPage(
                 dashboardHeader(title="Crypto Dashboard",
                                 dropdownMenu(
                                   type="message", messageItem(from="Dashboard welcome", message="Welcome to omega build."),                      # messageItem(from = "Sales Update", message = "Sales are at 55%", icon=icon("bar-chart"), time="22:00"),                      # messageItem(from = "Sales Udpate", message = "Meeting at 6pm", icon=icon("handshake-o"), time="03-25-2017")
@@ -48,10 +48,10 @@ shinyUI(fluidPage(
                               box(status="primary", solidHeader = F, plotOutput("NLPplot2") ) )
                     ),
                     tabItem(tabName = "Documentation", 
-                            pre(includeText("home/ubuntu/documentation.txt"))
+                            pre(includeText("documentation.txt"))
                     ),
                     tabItem(tabName = "Donate",
-                            pre(includeText("home/ubuntu/donate.txt"))
+                            pre(includeText("donate.txt"))
                     )
                   )
                 )

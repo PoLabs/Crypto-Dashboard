@@ -96,7 +96,7 @@ for(pair in pair.list){
     }
     
     if(pair != 'BNBBTC'){
-      for(y in 1:6){      #take bind of data and 1-6 frames from pred.L24.df to pred.vectorA
+      for(y in 1:length(Mlist)){      #take bind of data and 1-6 frames from pred.L24.df to pred.vectorA
         current.df <- cbind(pred.vector[1:(nrow(pred.vector)-24),], pred.L24[,(2+y)])     #compute all 6 times for model
         pred <- predict(Mlist[[y]], newdata=current.df[,1:pred.varnum], type="prob")
         current.df$test <- ifelse(pred[,2]>0.5,1,0)

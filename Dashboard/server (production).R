@@ -81,17 +81,17 @@ shinyServer(function(input, output){
     n <- input$varselectA
     if(n %in% c('raw.sent', 'comment.sent')){
       nlpA.df <- nlpA()
-      plot(x=c(1:nrow(nlpA.df)), y=nlpA.df[[n]], type = "l", main=input$pairAInput, ylab='', xlab='1hr intervals')
+      plot(x=c(1:nrow(nlpA.df)), y=nlpA.df[[n]], type = "l", main=input$pairAInput, ylab='', xlab=paste0('Last ', round((nrow(nlpA.df)/24),1), ' days in 1hr intervals'))
     }else{pairA.df <- pairA()
-    plot(x=c(1:nrow(pairA.df)), y=pairA.df[[n]], type = "l", main=input$pairAInput, ylab='', xlab='Past 7d in 5min intervals')} }) # plot A
+    plot(x=c(1:nrow(pairA.df)), y=pairA.df[[n]], type = "l", main=input$pairAInput, ylab='', xlab=paste0('Past ', round((nrow(pairA.df)/288),1), 'days in 5min intervals'))} }) # plot A
   
   output$plot2 <- renderPlot({
     n <- input$varselectB
     if(n %in% c('raw.sent', 'comment.sent')){
       nlpB.df <- nlpB()
-      plot(x=c(1:nrow(nlpB.df)), y=nlpB.df[[n]], type = "l", main=input$pairBInput, ylab='', xlab='1hr intervals')
+      plot(x=c(1:nrow(nlpB.df)), y=nlpB.df[[n]], type = "l", main=input$pairBInput, ylab='', xlab=paste0('Last ', round((nrow(nlpB.df)/24),1), ' days in 1hr intervals'))
     }else{pairB.df <- pairB()
-    plot(x=c(1:nrow(pairB.df)), y=pairB.df[[n]], type = "l", main=input$pairBInput, ylab='', xlab='Past 7d in 5min intervals')} }) # plot B
+    plot(x=c(1:nrow(pairB.df)), y=pairB.df[[n]], type = "l", main=input$pairBInput, ylab='', xlab=paste0('Past ', round((nrow(pairB.df)/288),1), 'days in 5min intervals'))} }) # plot B
   
   output$modellistA <- renderUI({
     #look into folder for models, make choices vector

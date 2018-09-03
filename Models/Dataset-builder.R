@@ -41,6 +41,9 @@ FeatEng.list <- function(pairlist){
   }
   return(pairlist)
 }
+
+#need a second feat eng for BTC features
+
 Ybuilder.list <- function(pairlist, frame){
   L24.list <- list()
   Y.df.list <- list()
@@ -395,6 +398,38 @@ for(i in 1:3){
 
 finalsets11 <- list(finalsets2[[1]], finalsets2[[2]], finalsets2[[3]], finalsets2[[6]], finalsets2[[7]], finalsets2[[8]], finalsets2[[9]], finalsets2[[10]], finalsets2[[11]], finalsets2[[12]], finalsets2[[14]], finalsets2[[15]], finalsets2[[16]], finalsets2[[17]], finalsets2[[18]], finalsets2[[19]], finalsets2[[20]], finalsets2[[21]], finalsets2[[22]], finalsets2[[23]], finalsets2[[24]])
 dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC', 'TRXBTC', 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
+
+NLP.name <-  c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
+#get btc vectors
+btc.sent <- fread('9.02.2018/NLPdump/BTCUSDT-NLP.csv')
+btc.sent <- btc.sent[,2:3]
+print(paste0('btc length sent ', nrow(btc.sent)))
+stop <- 0
+
+for(pair in 12:21){  #this will have to loop over all 10 pairs and all 6df fro each
+  #get sentvectors
+  print(NLP.name[(pair-11)])
+  pair.sent <- fread(paste0('9.02.2018/NLPdump/', NLP.name[(pair-11)], '-NLP.csv'))
+  pair.sent <- pair.sent[,2:3]
+  print(paste0('pair length sent ', nrow(pair.sent)))
+  
+  for(frame in 1:6){
+    #add sentiment x2,  #add btc sentiment x2
+    print(paste0('pair data length ', nrow(finalsets11[[pair]][[frame]])))
+    smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(finalsets11[[pair]][[frame]])))
+    btc.df <- finalsets11[[3]][[frame]][,c(5,6,8,30,32,47)]
+    
+    finalsets11[[pair]][[frame]] <- cbind(finalsets11[[pair]][[frame]][((nrow(finalsets11[[pair]][[frame]])-smallest)+1):nrow(finalsets11[[pair]][[frame]]),], pair.sent[((nrow(pair.sent)-smallest)+1):nrow(pair.sent),], btc.sent[((nrow(btc.sent)-smallest)+1):nrow(btc.sent),])
+    #btc price  #btc volume  #12hr btc price  #12 hr btc volume  #12hr btc RSI
+    print('sent added fine')
+    finalsets11[[pair]][[frame]] <- cbind(finalsets11[[pair]][[frame]], btc.df[((nrow(btc.df)-smallest)+1):nrow(btc.df),])#owr::cbind.fill(finalsets11[[pair]][[frame]], btc.df[(nrow()-):,])
+    finalsets11[[pair]][[frame]] <- finalsets11[[pair]][[frame]][complete.cases(finalsets11[[pair]][[frame]]),] 
+  }
+}
+
+
+
+
 
 #write csvs
 for(Npair in 1:21){

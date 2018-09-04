@@ -1,8 +1,10 @@
-setwd("/home/ubuntu/crypto/8.13.2018")# setwd('C:/Users/Po/Sync/Crypto/dashboard/model data')
+setwd("/home/ubuntu/crypto/9.02.2018")# setwd('C:/Users/Po/Sync/Crypto/dashboard/model data')
 pcklibs <- c("dplyr", "caTools", "Metrics", "rpart", "pROC", "caret", "caretEnsemble", "data.table", "xgboost") #"TTR")#"Boruta", #install.packages(c("dplyr", "caTools", "Metrics", "rpart", "pROC", "caret", "caretEnsemble", "data.table"))
 lapply(pcklibs, require, character.only=TRUE)
 
-pair.vector <- c('TRXBTC')#'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC', 'TRXBTC')#'ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 
+pair.vector <- c('TRXBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC', 'ETHUSDT', 'BNBUSDT', 'BNBBTC', 'ETHBTC')
+pair.vector <- c('XLMBTC', 'ETHUSDT', 'BNBUSDT', 'BNBBTC', 'ETHBTC', 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
+# pair.vector <- c('BTCUSDT')
 
 for(pair in pair.vector){
   
@@ -15,11 +17,12 @@ for(pair in pair.vector){
   dataset.list[[6]] <- fread(file=paste0(pair, '-a6.csv'))
   
   for (i in 1:6){
+    print(paste0(pair, ' frame # ', i))
     #model: we now have all 6 Y's in combined dfs for BTC
     ###################
     #XGBoost tune grid
-    xgb_grid_A1 = expand.grid(nrounds = c(1400), eta = c(0.01, 0.005),
-                              max_depth = c(12), subsample = c(1), gamma = c(1, 0.5), colsample_bytree = c(1), min_child_weight = c(1, 0.5) )
+    xgb_grid_A1 = expand.grid(nrounds = c(1000), eta = c(0.01, 0.005),
+                              max_depth = c(12), subsample = c(1), gamma = c(0.5), colsample_bytree = c(1), min_child_weight = c(1) )
     
     #################
     #SVM-RBF tuner

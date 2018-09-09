@@ -1,7 +1,7 @@
 
 #this splits caret model lists into singles and saves as RDS
-setwd('C:/Users/Po/Desktop/crypto data/8.11.2018')
-pairs <- c('ADABTC', 'BNBBTC', 'BNBUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'NEOBTC', 'TRXBTC', 'XLMBTC', 'BTCUSDT') 
+setwd('C:/Users/Po/Desktop/crypto data/9.02.2018')#'TRXBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC','ETHUSDT', 'BNBUSDT', 'BNBBTC', 'ETHBTC', 
+pairs <- c( 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
 
 currentList <- list()
 for(pair in pairs){

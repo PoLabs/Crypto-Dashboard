@@ -56,7 +56,7 @@ Ybuilder.list <- function(pair.df){   #a list of X dfs in
   return(L24)
 }# Y dataframe builder
 
-pair.list <- c('BTCUSDT', 'ETHUSDT','BNBUSDT','BNBBTC','ETHBTC','ADABTC','EOSBTC') #'ETHBTC', 'BNBBTC', 
+pair.list <- c('BTCUSDT', 'ETHUSDT','ADABTC','EOSBTC', 'BCCBTC', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTRC', 'BNBUSDT','BNBBTC','ETHBTC') #'ETHBTC', 'BNBBTC', 
 pair.df.list <- list()
 
 for(pair in pair.list){

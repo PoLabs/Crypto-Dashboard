@@ -73,15 +73,44 @@ for(pair in pair.list){
     v.ntrade <- aggregate(veclist[[dset]][,7], list(rep(1:(nrow(veclist[[dset]])%/%n+1), each=n, len=nrow(veclist[[dset]]))), sum)
     v.volume <- aggregate(veclist[[dset]][,5], list(rep(1:(nrow(veclist[[dset]])%/%n+1), each=n, len=nrow(veclist[[dset]]))), sum)
     veclist2[[dset]][,7] <- v.ntrade[1:nrow(veclist2[[dset]]),2]    #replace vol and ntrades
-    veclist2[[dset]][,5] <- v.volume[1:nrow(veclist2[[dset]]),2]      }
+    veclist2[[dset]][,5] <- v.volume[1:nrow(veclist2[[dset]]),2]      }  #aggregate
   
   pred.vector <- feat.engineer(veclist2[[1]]) #call feat.eng
   pred.vector <- pred.vector[complete.cases(pred.vector),] 
+  
+  if(pair == 'BTCUSDT'){    BTCdata.df <- pred.vector  }
+  
+  #add in NLP data here
+  if(c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC') %in% pair){
+    #get btc vectors
+    btc.sent <- fread('BTCUSDT/sync/tracker.csv')
+    btc.sent <- btc.sent[,2:3]
+    names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
+    print(paste0('btc length sent ', nrow(btc.sent)))
+    
+    pair.sent <- fread(paste0(pair, '/sync/tracker.csv'))
+    pair.sent <- pair.sent[,2:3]
+    print(paste0('pair length sent ', nrow(pair.sent)))
+    
+    #add sentiment x2,  #add btc sentiment x2
+    print(paste0('pair data length ', nrow(pred.vector)))
+    btc.df <- BTCdata.df[,c(5,6,8,30,32,47)]
+    names(btc.df) <- c('btc.price', 'btc.volume', 'btc.ntrade', 'btc.price.12h', 'btc.volume.12h', 'btc.RSI.12h')
+    smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(pred.vector)))
+        
+    pred.vector <- cbind(pred.vector[((nrow(pred.vector)-smallest)+1):nrow(pred.vector),], pair.sent[((nrow(pair.sent)-smallest)+1):nrow(pair.sent),], btc.sent[((nrow(btc.sent)-smallest)+1):nrow(btc.sent),])
+    
+    #btc price  #btc volume  ntrade #12hr btc price  #12 hr btc volume  #12hr btc RSI
+    print('sent added fine')
+    pred.vector <- cbind(pred.vector, btc.df[((nrow(btc.df)-smallest)+1):nrow(btc.df),])
+    pred.vector <- pred.vector[complete.cases(pred.vector),] 
+  }
+  
   pred.varnum <- ncol(pred.vector)  #REMOVE NAs --- done automatically
   pred.L24 <- Ybuilder.list(pred.vector) #call L24
   
   Mlist <- list()
-  testpath <- paste0(pair,'/models/test-', pair, '.csv') #read in test.csv if not creation run
+  testpath <- paste0(pair,'/models/test-', pair, '.csv') #read in test.cs v if not creation run
   test.df <- as.data.frame(fread(file='test-blank.csv'))
   
   for(m in 1:length(model.list)){

@@ -56,10 +56,11 @@ Ybuilder.list <- function(pair.df){   #a list of X dfs in
   return(L24)
 }# Y dataframe builder
 
-pair.list <- c('BTCUSDT', 'ETHUSDT','ADABTC','EOSBTC', 'BCCBTC', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTRC', 'BNBUSDT','BNBBTC','ETHBTC') #'ETHBTC', 'BNBBTC', 
+pair.list <- c('BTCUSDT', 'ADABTC','EOSBTC', 'BCCBTC', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTC', 'BNBBTC','ETHBTC', 'BNBBTC','BNBUSDT', 'ETHUSDT') #'ETHBTC', 'BNBBTC', 
 pair.df.list <- list()
 
 for(pair in pair.list){
+  print(pair)
   csvfolder <- paste0(pair, "/small", pair, ".csv")  #read in csv
   pair.df <- fread(csvfolder)
   pair.df <- pair.df[(nrow(pair.df)-4000):(nrow(pair.df)),]
@@ -81,7 +82,7 @@ for(pair in pair.list){
   if(pair == 'BTCUSDT'){    BTCdata.df <- pred.vector  }
   
   #add in NLP data here
-  if(c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC') %in% pair){
+  if(pair %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')){
     #get btc vectors
     btc.sent <- fread('BTCUSDT/sync/tracker.csv')
     btc.sent <- btc.sent[,2:3]
@@ -97,7 +98,7 @@ for(pair in pair.list){
     btc.df <- BTCdata.df[,c(5,6,8,30,32,47)]
     names(btc.df) <- c('btc.price', 'btc.volume', 'btc.ntrade', 'btc.price.12h', 'btc.volume.12h', 'btc.RSI.12h')
     smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(pred.vector)))
-        
+    
     pred.vector <- cbind(pred.vector[((nrow(pred.vector)-smallest)+1):nrow(pred.vector),], pair.sent[((nrow(pair.sent)-smallest)+1):nrow(pair.sent),], btc.sent[((nrow(btc.sent)-smallest)+1):nrow(btc.sent),])
     
     #btc price  #btc volume  ntrade #12hr btc price  #12 hr btc volume  #12hr btc RSI
@@ -116,6 +117,9 @@ for(pair in pair.list){
   for(m in 1:length(model.list)){
     if(pair != 'BNBBTC'){
       for(x in 1:6){      #load all 6 model times      
+        if(pair == 'ETHUSDT'){ 
+          if(x==6){x <- x}
+          else{x <- x +1 } }
         modelloaderA <- paste0(pair, '/models/A', x, '-', pair, '-', model.list[[m]])
         Mlist[[x]] <- readRDS(modelloaderA)      }
     }else{
@@ -141,6 +145,6 @@ for(pair in pair.list){
         test.df[y, (m+1)] <- 1-(as.double(sum(current.df$wrong)/nrow(current.df)))
       }
     }
-      fwrite(test.df, file=testpath)
-    }
+    fwrite(test.df, file=testpath)
+  }
 }

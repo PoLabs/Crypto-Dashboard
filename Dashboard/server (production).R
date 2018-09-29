@@ -166,6 +166,9 @@ shinyServer(function(input, output){
     vectorA.df <- veclist2[[1]][nrow(veclist2[[1]]):1,]#un-reverse
     pred.vectorA <- feat.engineer(vectorA.df)
     pred.vectorA <- pred.vectorA[nrow(pred.vectorA),]
+    
+    #if in x COIN then add sent data
+    
     modelnameA <- input$modelInputA
     if(modelnameA %in% c('ensemble', 'stack')){
       resultsA.df <- as.data.frame(fread(paste0(pairnameA, '/models/results-', pairnameA, '.csv')))
@@ -187,20 +190,22 @@ shinyServer(function(input, output){
        }else{resultsA.df[c,3] <- as.double(max(Alist[[c]]$results$ROC))   }  
     }
     
-    #add calls for sent data on: %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC'
+    
+    
+    #neeeds to call in BTC data, send through same agg codei
+    
+    #add calls for sent data on: 
+    if(pairnameA %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')){
     #get btc vectors
-    # btc.sent <- fread('BTCUSDT/sync/tracker.csv')
-    # btc.sent <- btc.sent[,2:3]
-    # names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
-    # print(paste0('btc length sent ', nrow(btc.sent)))
-    # 
-    # pair.sent <- fread(paste0(pair, '/sync/tracker.csv'))
-    # pair.sent <- pair.sent[,2:3]
-    # print(paste0('pair length sent ', nrow(pair.sent)))
-    # 
-    # #add sentiment x2,  #add btc sentiment x2
-    # print(paste0('pair data length ', nrow(pred.vector)))
-    # btc.df <- BTCdata.df[,c(5,6,8,30,32,47)]
+     btc.sent <- fread('BTCUSDT/sync/tracker.csv')
+     btc.sent <- btc.sent[,2:3]
+     names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
+     print(paste0('btc length sent ', nrow(btc.sent)))
+     pair.sent <- fread(paste0(pairnameA, '/sync/tracker.csv'))
+     pair.sent <- pair.sent[,2:3]
+    #add sentiment x2,  #add btc sentiment x2
+ 
+    btc.df <- BTCdata.df[,c(5,6,8,30,32,47)]
     # names(btc.df) <- c('btc.price', 'btc.volume', 'btc.ntrade', 'btc.price.12h', 'btc.volume.12h', 'btc.RSI.12h')
     # smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(pred.vector)))
     # 
@@ -209,6 +214,7 @@ shinyServer(function(input, output){
     # #btc price  #btc volume  ntrade #12hr btc price  #12 hr btc volume  #12hr btc RSI
     # print('sent added fine')
     # pred.vector <- cbind(pred.vector, btc.df[((nrow(btc.df)-smallest)+1):nrow(btc.df),])
+    }
     
     resultsA.df <- cbind(c('24hr 0.5% increase:  ','24hr 1% increase:  ','24hr 2% increase:  ','24hr 0.5% decrease:  ','24hr 1% decrease:  ','24hr 2% decrease:  '), resultsA.df)
     names(resultsA.df) <- c("Classification", "Binary", "Raw probability", "Train ROC*", "Test accuracy")

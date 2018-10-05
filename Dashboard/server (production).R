@@ -165,9 +165,38 @@ shinyServer(function(input, output){
       veclist2[[dset]][,5] <- v.volume[1:nrow(veclist2[[dset]]),2]      }
     vectorA.df <- veclist2[[1]][nrow(veclist2[[1]]):1,]#un-reverse
     pred.vectorA <- feat.engineer(vectorA.df)
-    pred.vectorA <- pred.vectorA[nrow(pred.vectorA),]
+    pred.vectorA <- pred.vectorA[complete.cases(pred.vectorA),]
     
     #if in x COIN then add sent data
+    if(pairnameA %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')){ 
+      #1. read BTC dataset, aggr, feat eng
+      BTCdata.df <- as.data.frame(fread(paste0('/home/ubuntu/crypto/', 'BTCUSDT', '/small', 'BTCUSDT', '.csv')))
+      BvectorA.df <- BTCdata.df[nrow(BTCdata.df):1,]#reverse
+      Bveclist <- list(BvectorA.df, BvectorA.df)
+      n <- 12
+      Bveclist2 <- lapply(Bveclist, function(x) aggregate(.~ cbind(grp = as.integer(gl(nrow(x), n, nrow(x)))), x, mean)[-1])
+      for (dset in 1:2){
+        v.ntrade <- aggregate(Bveclist[[dset]][,7], list(rep(1:(nrow(Bveclist[[dset]])%/%n+1), each=n, len=nrow(Bveclist[[dset]]))), sum)
+        v.volume <- aggregate(Bveclist[[dset]][,5], list(rep(1:(nrow(Bveclist[[dset]])%/%n+1), each=n, len=nrow(Bveclist[[dset]]))), sum)
+        Bveclist2[[dset]][,7] <- v.ntrade[1:nrow(Bveclist2[[dset]]),2]    #replace vol and ntrades
+        Bveclist2[[dset]][,5] <- v.volume[1:nrow(Bveclist2[[dset]]),2]      }
+      BvectorA.df <- Bveclist2[[1]][nrow(Bveclist2[[1]]):1,]#un-reverse
+      Bpred.vectorA <- feat.engineer(BvectorA.df)
+      Bpred.vectorA <- Bpred.vectorA[complete.cases(Bpred.vectorA),]
+    
+      #2. read in PAIR and BTC sentiment data 
+      btc.sent <- fread('BTCUSDT/sync/tracker.csv')
+      btc.sent <- btc.sent[,2:3]
+      names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
+      pair.sent <- fread(paste0(pairnameA, '/sync/tracker.csv'))
+      pair.sent <- pair.sent[,2:3]
+      #3. Combine sentiment x2,   btc sentiment x2
+      btc.df <- Bpred.vectorA [,c(5,6,8,30,32,47)]  ########this is fully aggred from intialization
+      names(btc.df) <- c('btc.price', 'btc.volume', 'btc.ntrade', 'btc.price.12h', 'btc.volume.12h', 'btc.RSI.12h')
+      smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(pred.vectorA)))
+      pred.vectorA <- cbind(pred.vectorA[((nrow(pred.vectorA)-smallest)+1):nrow(pred.vectorA),], pair.sent[((nrow(pair.sent)-smallest)+1):nrow(pair.sent),], btc.sent[((nrow(btc.sent)-smallest)+1):nrow(btc.sent),])
+      #btc price  #btc volume  ntrade #12hr btc price  #12 hr btc volume  #12hr btc RSI
+      pred.vectorA <- cbind(pred.vectorA, btc.df[((nrow(btc.df)-smallest)+1):nrow(btc.df),])    }
     
     modelnameA <- input$modelInputA
     if(modelnameA %in% c('ensemble', 'stack')){
@@ -188,32 +217,6 @@ shinyServer(function(input, output){
        if(modelnameA %in% c('ensemble', 'stack')){
          resultsA.df[c,3] <- as.double(max(Alist[[c]]$error$ROC))
        }else{resultsA.df[c,3] <- as.double(max(Alist[[c]]$results$ROC))   }  
-    }
-    
-    
-    
-    #neeeds to call in BTC data, send through same agg codei
-    
-    #add calls for sent data on: 
-    if(pairnameA %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')){
-    #get btc vectors
-     btc.sent <- fread('BTCUSDT/sync/tracker.csv')
-     btc.sent <- btc.sent[,2:3]
-     names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
-     print(paste0('btc length sent ', nrow(btc.sent)))
-     pair.sent <- fread(paste0(pairnameA, '/sync/tracker.csv'))
-     pair.sent <- pair.sent[,2:3]
-    #add sentiment x2,  #add btc sentiment x2
- 
-    btc.df <- BTCdata.df[,c(5,6,8,30,32,47)]
-    # names(btc.df) <- c('btc.price', 'btc.volume', 'btc.ntrade', 'btc.price.12h', 'btc.volume.12h', 'btc.RSI.12h')
-    # smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(pred.vector)))
-    # 
-    # pred.vector <- cbind(pred.vector[((nrow(pred.vector)-smallest)+1):nrow(pred.vector),], pair.sent[((nrow(pair.sent)-smallest)+1):nrow(pair.sent),], btc.sent[((nrow(btc.sent)-smallest)+1):nrow(btc.sent),])
-    # 
-    # #btc price  #btc volume  ntrade #12hr btc price  #12 hr btc volume  #12hr btc RSI
-    # print('sent added fine')
-    # pred.vector <- cbind(pred.vector, btc.df[((nrow(btc.df)-smallest)+1):nrow(btc.df),])
     }
     
     resultsA.df <- cbind(c('24hr 0.5% increase:  ','24hr 1% increase:  ','24hr 2% increase:  ','24hr 0.5% decrease:  ','24hr 1% decrease:  ','24hr 2% decrease:  '), resultsA.df)

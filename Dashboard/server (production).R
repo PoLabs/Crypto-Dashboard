@@ -165,10 +165,10 @@ shinyServer(function(input, output){
       veclist2[[dset]][,5] <- v.volume[1:nrow(veclist2[[dset]]),2]      }
     vectorA.df <- veclist2[[1]][nrow(veclist2[[1]]):1,]#un-reverse
     pred.vectorA <- feat.engineer(vectorA.df)
-    pred.vectorA <- pred.vectorA[complete.cases(pred.vectorA),]
+    pred.vectorA <- pred.vectorA[nrow(pred.vectorA),]
     
     #if in x COIN then add sent data
-    if(pairnameA %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')){ 
+    if(pairnameA %in% c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')){
       #1. read BTC dataset, aggr, feat eng
       BTCdata.df <- as.data.frame(fread(paste0('/home/ubuntu/crypto/', 'BTCUSDT', '/small', 'BTCUSDT', '.csv')))
       BvectorA.df <- BTCdata.df[nrow(BTCdata.df):1,]#reverse
@@ -183,12 +183,12 @@ shinyServer(function(input, output){
       BvectorA.df <- Bveclist2[[1]][nrow(Bveclist2[[1]]):1,]#un-reverse
       Bpred.vectorA <- feat.engineer(BvectorA.df)
       Bpred.vectorA <- Bpred.vectorA[complete.cases(Bpred.vectorA),]
-    
-      #2. read in PAIR and BTC sentiment data 
-      btc.sent <- fread('BTCUSDT/sync/tracker.csv')
+
+      #2. read in PAIR and BTC sentiment data
+      btc.sent <- fread('/home/ubuntu/crypto/BTCUSDT/sync/tracker.csv')
       btc.sent <- btc.sent[,2:3]
       names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
-      pair.sent <- fread(paste0(pairnameA, '/sync/tracker.csv'))
+      pair.sent <- fread(paste0('/home/ubuntu/crypto/', pairnameA, '/sync/tracker.csv'))
       pair.sent <- pair.sent[,2:3]
       #3. Combine sentiment x2,   btc sentiment x2
       btc.df <- Bpred.vectorA [,c(5,6,8,30,32,47)]  ########this is fully aggred from intialization
@@ -247,6 +247,7 @@ shinyServer(function(input, output){
     vectorB.df <- veclist2[[1]][nrow(veclist2[[1]]):1,]#un-reverse
     pred.vectorB <- feat.engineer(vectorB.df)
     pred.vectorB <- pred.vectorB[nrow(pred.vectorB),]
+    
     modelnameB <- input$modelInputB
     if(modelnameB %in% c('ensemble', 'stack')){
       resultsB.df <- as.data.frame(fread(paste0(pairnameB, '/models/results-', pairnameB, '.csv')))
@@ -256,6 +257,7 @@ shinyServer(function(input, output){
       resultsB.df <- as.data.frame(fread(paste0(pairnameB, '/models/results-', pairnameB, '.csv')))
       for(m in 1:6){        modelloaderB <- paste0(pairnameB, '/models/A', m, '-', pairnameB, '-', modelnameB )
       Blist[[m]] <- readRDS(modelloaderB)      }   }
+    
     for(c in 1:6){                                                                  #execute model
       # fwrite(as.data.frame(c(dim(pred.vectorA), "fuck")), file='pred.vector-dims.csv')#debug
       predB <- predict(Blist[[c]], pred.vectorB)

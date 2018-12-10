@@ -10,3 +10,13 @@ Structure:
 
 contact:
 polabs@protonmail.com
+
+
+
+
+Training work flow:
+1. get data
+    - smallcsv, tracker --> local dir
+    
+    
+    

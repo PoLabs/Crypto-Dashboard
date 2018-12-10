@@ -7,13 +7,11 @@ BinanceData.f <- data.frame(c('a', 'b'), c('c', 'd'))
 TxN.df <- data.frame(c('a', 'b'), c('c', 'd'))
 # SeedData <- data.frame(c('a', 'b'), c('c', 'd'))
 
-pair.vector <- c('BTCUSDT','ETHUSDT','BNBUSDT','ADABTC', 'EOSBTC', 'NEOBTC', 'TRXBTC', 'XLMBTC', 'BNBBTC', 'ETHBTC', 'IOTABTC')#c('BTCUSDT','ETHUSDT','BNBUSDT')
+pair.vector <- c('BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADABTC', 'EOSBTC', 'NEOBTC', 'TRXBTC', 'XLMBTC', 'BNBBTC', 'ETHBTC', 'IOTABTC')#c('BTCUSDT','ETHUSDT','BNBUSDT')
 #pair.vector <- c('XLMBTC', 'XLMBTC')
-
-ss.new.BTCUSDT <- fileSnapshot(path="/home/ubuntu/cryptoAPI/BTCUSDT/raw", file.info = T) #"/home/ubuntu/cryptoAPI/BTCUSDT/raw"
 ss.new.ETHUSDT <- fileSnapshot(path="/home/ubuntu/cryptoAPI/ETHUSDT/raw", file.info = T) #"/home/ubuntu/cryptoAPI/ETHUSDT/raw"
 ss.new.BNBUSDT <- fileSnapshot(path="/home/ubuntu/cryptoAPI/BNBUSDT/raw", file.info = T)
-
+ss.new.BTCUSDT <- fileSnapshot(path="/home/ubuntu/cryptoAPI/BTCUSDT/raw", file.info = T) #"/home/ubuntu/cryptoAPI/BTCUSDT/raw"
 ss.new.ADABTC <- fileSnapshot(path="/home/ubuntu/cryptoAPI/ADABTC/raw", file.info = T) #"/home/ubuntu/cryptoAPI/BTCUSDT/raw"
 ss.new.EOSBTC <- fileSnapshot(path="/home/ubuntu/cryptoAPI/EOSBTC/raw", file.info = T) #"/home/ubuntu/cryptoAPI/ETHUSDT/raw"
 ss.new.NEOBTC <- fileSnapshot(path="/home/ubuntu/cryptoAPI/NEOBTC/raw", file.info = T)

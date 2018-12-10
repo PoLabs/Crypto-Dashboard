@@ -1,4 +1,4 @@
-setwd('C:/Users/Po/Desktop/crypto data')
+setwd('/home/polabs1/Crypto')
 pcklibs <- c("dplyr", "caTools", "Metrics", "rpart", "pROC", "caret", "Boruta", "caretEnsemble", "data.table", "TTR")
 lapply(pcklibs, require, character.only=TRUE)
 money5 <- as.double(0.005)

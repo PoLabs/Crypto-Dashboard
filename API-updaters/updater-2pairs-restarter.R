@@ -180,7 +180,7 @@ for(Cpair in pair.vector){
   BinanceData.f$MACDspreadE <- MACDspreadE[,1]
   
   ###############################
-  csvfolder <- paste0(Cpair, "/CSV/small", Cpair, ".csv")
+  csvfolder <- paste0("full/small", Cpair, ".csv")
   fwrite(BinanceData.f, file = csvfolder)
 }
 

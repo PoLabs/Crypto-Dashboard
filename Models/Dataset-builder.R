@@ -174,64 +174,64 @@ Ybuilder.list.singles <- function(pairlist, frame){
 ##########################
 BNBUSDT.new1min.df <- fread(file='BNBUSDT-oldBOX.csv')#1
 ETHUSDT.new1min.df <- fread(file='ETHUSDT-oldBOX.csv')#2
-BNBUSDT.new5min.df <- fread(file='9.02.2018/smallBNBUSDT.csv')#3
+BNBUSDT.new5min.df <- fread(file='12.09.2018/smallBNBUSDT.csv')#3
 BNBUSDT.new5min.df <- BNBUSDT.new5min.df[1:(nrow(BNBUSDT.new5min.df)-4000),]
-ETHUSDT.new5min.df <- fread(file='9.02.2018/smallETHUSDT.csv')#4
+ETHUSDT.new5min.df <- fread(file='12.09.2018/smallETHUSDT.csv')#4
 ETHUSDT.new5min.df <- ETHUSDT.new5min.df[1:(nrow(ETHUSDT.new5min.df)-4000),]
 BNBBTC.old5min.df <- fread(file='BNBBTC-oldBOX.csv')#5
-BNBBTC.new5min.df <- fread(file='9.02.2018/smallBNBBTC.csv')#6
+BNBBTC.new5min.df <- fread(file='12.09.2018/smallBNBBTC.csv')#6
 BNBBTC.new5min.df <- BNBBTC.new5min.df[1:(nrow(BNBBTC.new5min.df)-4000),]
 ETHBTC.old5min.df <- fread(file='ETHBTC-oldBOX.csv')#7
-ETHBTC.new5min.df <- fread(file='9.02.2018/smallETHBTC.csv')#8
+ETHBTC.new5min.df <- fread(file='12.09.2018/smallETHBTC.csv')#8
 ETHBTC.new5min.df <- ETHBTC.new5min.df[1:(nrow(ETHBTC.new5min.df)-4000),]
 ADABTC.old5min.df <- fread(file='ADABTC-oldBOX.csv')#9
-ADABTC.new5min.df <- fread(file='9.02.2018/smallADABTC.csv')#10
+ADABTC.new5min.df <- fread(file='12.09.2018/smallADABTC.csv')#10
 ADABTC.new5min.df <- ADABTC.new5min.df[1:(nrow(ADABTC.new5min.df)-4000),]
 EOSBTC.old5min.df <- fread(file='EOSBTC-oldBOX.csv')#11
-EOSBTC.new5min.df <- fread(file='9.02.2018/smallEOSBTC.csv')#12
+EOSBTC.new5min.df <- fread(file='12.09.2018/smallEOSBTC.csv')#12
 EOSBTC.new5min.df <- EOSBTC.new5min.df[1:(nrow(EOSBTC.new5min.df)-4000),]
 IOTABTC.old5min.df <- fread(file='IOTABTC-oldBOX.csv')#13
-IOTABTC.new5min.df <- fread(file='9.02.2018/smallIOTABTC.csv')#14
+IOTABTC.new5min.df <- fread(file='12.09.2018/smallIOTABTC.csv')#14
 IOTABTC.new5min.df <- IOTABTC.new5min.df[1:(nrow(IOTABTC.new5min.df)-4000),]
-NEOBTC.new5min.df <- fread(file='9.02.2018/smallNEOBTC.csv')#15
+NEOBTC.new5min.df <- fread(file='12.09.2018/smallNEOBTC.csv')#15
 NEOBTC.new5min.df <- NEOBTC.new5min.df[1:(nrow(NEOBTC.new5min.df)-4000),]
-TRXBTC.new5min.df <- fread(file='9.02.2018/smallTRXBTC.csv')#16
+TRXBTC.new5min.df <- fread(file='12.09.2018/smallTRXBTC.csv')#16
 TRXBTC.new5min.df <- TRXBTC.new5min.df[1:(nrow(TRXBTC.new5min.df)-4000),]
-XLMBTC.new5min.df <- fread(file='9.02.2018/smallXLMBTC.csv')#17
+XLMBTC.new5min.df <- fread(file='12.09.2018/smallXLMBTC.csv')#17
 XLMBTC.new5min.df <- XLMBTC.new5min.df[1:(nrow(XLMBTC.new5min.df)-4000),]
 #new
 XLMBTC.old5min.df <- fread(file='XLMBTC-oldBOX.csv')#18
 TRXBTC.old5min.df <- fread(file='TRXBTC-oldBOX.csv')#19
 BTCUSDT.old5min.df <-fread(file='BTCUSDT-old5mins.csv')#20 fuckedf
 BTCUSDT.new1min.df <- fread(file='BTCUSDT-new1mins.csv')#21
-BTCUSDT.new5min.df <- fread(file='9.02.2018/smallBTCUSDT.csv')#22
+BTCUSDT.new5min.df <- fread(file='12.09.2018/smallBTCUSDT.csv')#22
 BTCUSDT.new5min.df <- BTCUSDT.new5min.df[1:(nrow(BTCUSDT.new5min.df)-4000),]
 #newer
-BCCBTC.new5min.df <- fread(file='9.02.2018/smallBCCBTC.csv')#22
+BCCBTC.new5min.df <- fread(file='12.09.2018/smallBCCBTC.csv')#22
 BCCBTC.new5min.df <- BCCBTC.new5min.df[1:(nrow(BCCBTC.new5min.df)-4000),]
-ICXBTC.new5min.df <- fread(file='9.02.2018/smallICXBTC.csv')#22
+ICXBTC.new5min.df <- fread(file='12.09.2018/smallICXBTC.csv')#22
 ICXBTC.new5min.df <- ICXBTC.new5min.df[1:(nrow(ICXBTC.new5min.df)-4000),]
-LTCBTC.new5min.df <- fread(file='9.02.2018/smallLTCBTC.csv')#22
+LTCBTC.new5min.df <- fread(file='12.09.2018/smallLTCBTC.csv')#22
 LTCBTC.new5min.df <- LTCBTC.new5min.df[1:(nrow(LTCBTC.new5min.df)-4000),]
-NANOBTC.new5min.df <- fread(file='9.02.2018/smallNANOBTC.csv')#22
+NANOBTC.new5min.df <- fread(file='12.09.2018/smallNANOBTC.csv')#22
 NANOBTC.new5min.df <- NANOBTC.new5min.df[1:(nrow(NANOBTC.new5min.df)-4000),]
-OMGBTC.new5min.df <- fread(file='9.02.2018/smallOMGBTC.csv')#22
+OMGBTC.new5min.df <- fread(file='12.09.2018/smallOMGBTC.csv')#22
 OMGBTC.new5min.df <- OMGBTC.new5min.df[1:(nrow(OMGBTC.new5min.df)-4000),]
-ONTBTC.new5min.df <- fread(file='9.02.2018/smallONTBTC.csv')#22
+ONTBTC.new5min.df <- fread(file='12.09.2018/smallONTBTC.csv')#22
 ONTBTC.new5min.df <- ONTBTC.new5min.df[1:(nrow(ONTBTC.new5min.df)-4000),]
-VENBTC.new5min.df <- fread(file='9.02.2018/smallVENBTC.csv')#22
+VENBTC.new5min.df <- fread(file='12.09.2018/smallVENBTC.csv')#22
 VENBTC.new5min.df <- VENBTC.new5min.df[1:(nrow(VENBTC.new5min.df)-4000),]
-XMRBTC.new5min.df <- fread(file='9.02.2018/smallXMRBTC.csv')#22
+XMRBTC.new5min.df <- fread(file='12.09.2018/smallXMRBTC.csv')#22
 XMRBTC.new5min.df <- XMRBTC.new5min.df[1:(nrow(XMRBTC.new5min.df)-4000),]
-XRPBTC.new5min.df <- fread(file='9.02.2018/smallXRPBTC.csv')#22
+XRPBTC.new5min.df <- fread(file='12.09.2018/smallXRPBTC.csv')#22
 XRPBTC.new5min.df <- XRPBTC.new5min.df[1:(nrow(XRPBTC.new5min.df)-4000),]
-XEMBTC.new5min.df <- fread(file='9.02.2018/smallXEMBTC.csv')#22
+XEMBTC.new5min.df <- fread(file='12.09.2018/smallXEMBTC.csv')#22
 XEMBTC.new5min.df <- XEMBTC.new5min.df[1:(nrow(XEMBTC.new5min.df)-4000),]
 
 datasetlist <- list(BNBUSDT.new1min.df, ETHUSDT.new1min.df, BNBUSDT.new5min.df, ETHUSDT.new5min.df, BNBBTC.old5min.df, BNBBTC.new5min.df, ETHBTC.old5min.df, 
                     ETHBTC.new5min.df, ADABTC.old5min.df, ADABTC.new5min.df, EOSBTC.old5min.df, EOSBTC.new5min.df, IOTABTC.old5min.df, IOTABTC.new5min.df, NEOBTC.new5min.df, 
                     TRXBTC.new5min.df, XLMBTC.new5min.df, XLMBTC.old5min.df, TRXBTC.old5min.df, BTCUSDT.new1min.df, BTCUSDT.new5min.df, BTCUSDT.new5min.df, BCCBTC.new5min.df,
-                    ICXBTC.new5min.df, LTCBTC.new5min.df, NANOBTC.new5min.df, OMGBTC.new5min.df, ONTBTC.new5min.df, VENBTC.new5min.df, XMRBTC.new5min.df, XRPBTC.new5min.df, XEMBTC.new5min.df)
+                    ICXBTC.new5min.df, LTCBTC.new5min.df, NANOBTC.new5min.df, OMGBTC.new5min.df, ONTBTC.new5min.df, VENBTC.new5min.df, XMRBTC.new5min.df, XRPBTC.new5min.df, XEMBTC.new5min.df) 
 
 for(i in 1:32){
   if(i == 20){
@@ -258,15 +258,15 @@ for (i in 1:32){
     }else{     no.dupes.list[[i]] <- datasetlist[[i]] } }
   #3 and 5: 3, 4, 6, 8 also 21,22
   if(i == 3 | i == 4 | i == 21 | i == 22){
-    list35 <- list(datasetlist[[i]][1:3430,], datasetlist[[i]][3870:5720,], datasetlist[[i]][5810:nrow(datasetlist[[i]]),])  
+    list35 <- list(datasetlist[[i]][1:3430,], datasetlist[[i]][3870:5720,], datasetlist[[i]][5810:35700,], datasetlist[[i]][35750:43140,], datasetlist[[i]][43240:nrow(datasetlist[[i]]),] )  
     no.dupes.list[[i]] <- list35 }
   #7 and 8: 7, 9, 11, 13 also 18, 19, 
-  if(i == 7 | i == 9 | i == 11 | i == 13 | i == 18 | i == 19){
-    list78 <- list(datasetlist[[i]][1:7650,], datasetlist[[i]][8560:nrow(datasetlist[[i]]),])
+  if(i == 7 | i == 9 | i == 11 | i == 13 | i == 18 | i == 19){ 
+    list78 <- list(datasetlist[[i]][1:7650,], datasetlist[[i]][8570:nrow(datasetlist[[i]]),])
     no.dupes.list[[i]] <- list78  }
   #1 and 3: 14:17, 12, 10, 
-  if(i == 15 | i == 16 | i == 17 | i == 12 | i == 10){
-    list13 <- list(datasetlist[[i]][1:1260,], datasetlist[[i]][1700:3535,], datasetlist[[i]][3640:nrow(datasetlist[[i]]),])
+  if(i == 15 | i == 16 | i == 17 | i == 10 | i == 12){
+    list13 <- list(datasetlist[[i]][1:1260,], datasetlist[[i]][1700:3535,], datasetlist[[i]][3635:33540,], datasetlist[[i]][33600:40980,], datasetlist[[i]][41075:nrow(datasetlist[[i]]),])
     no.dupes.list[[i]] <- list13
   }
   if(i == 23 | i == 25 | i == 29 | i == 30 | i == 31){
@@ -399,9 +399,13 @@ for(i in 1:3){
 finalsets11 <- list(finalsets2[[1]], finalsets2[[2]], finalsets2[[3]], finalsets2[[6]], finalsets2[[7]], finalsets2[[8]], finalsets2[[9]], finalsets2[[10]], finalsets2[[11]], finalsets2[[12]], finalsets2[[14]], finalsets2[[15]], finalsets2[[16]], finalsets2[[17]], finalsets2[[18]], finalsets2[[19]], finalsets2[[20]], finalsets2[[21]], finalsets2[[22]], finalsets2[[23]], finalsets2[[24]])
 dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC', 'TRXBTC', 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
 
+
+
+
+
 NLP.name <-  c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
 #get btc vectors
-btc.sent <- fread('9.02.2018/NLPdump/BTCUSDT-NLP.csv')
+btc.sent <- fread('12.09.2018/NLPdump/BTCUSDT-NLP.csv')
 btc.sent <- btc.sent[,2:3]
 names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
 print(paste0('btc length sent ', nrow(btc.sent)))
@@ -410,7 +414,7 @@ stop <- 0
 for(pair in 12:21){  #this will have to loop over all 10 pairs and all 6df fro each
   #get sentvectors
   print(NLP.name[(pair-11)])
-  pair.sent <- fread(paste0('9.02.2018/NLPdump/', NLP.name[(pair-11)], '-NLP.csv'))
+  pair.sent <- fread(paste0('12.09.2018/NLPdump/', NLP.name[(pair-11)], '-NLP.csv'))
   pair.sent <- pair.sent[,2:3]
   print(paste0('pair length sent ', nrow(pair.sent)))
   
@@ -436,10 +440,12 @@ for(pair in 12:21){  #this will have to loop over all 10 pairs and all 6df fro e
 for(Npair in 1:21){
   for(frame in 1:6){
     #build csv file name
-    csvname <- paste0('9.02.2018/', dfname.vector[Npair], '-a', frame, '.csv')
+    csvname <- paste0('12.09.2018/', dfname.vector[Npair], '-a', frame, '.csv')
     #save
     fwrite(finalsets11[[Npair]][[frame]], file=csvname)
-  }
+  }e]], file=csvname)
+e]], file=csvname)
+
 }
 
 

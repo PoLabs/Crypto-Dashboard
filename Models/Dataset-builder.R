@@ -154,7 +154,7 @@ Ybuilder.list.singles <- function(pairlist, frame){
   #if frame = 60combine different: 60 will be list of 3 lists of 6df, others are just list of 6df
   dataset.list <- list()  #combine datasets  (Y.df.list is a list of X length of 6 datasets
   # if(frame == 60){
-    dataset.list <- list(Y.df.list)
+  dataset.list <- list(Y.df.list)
   # }
   # if(frame == 12){
   #   for(y in 1:6){
@@ -276,7 +276,7 @@ for (i in 1:32){
   if(i == 24 | i == 27 | i == 28){
     list142 <- list(datasetlist[[i]][430:2275,], datasetlist[[i]][2365:nrow(datasetlist[[i]]),])#datasetlist[[i]][115:410,], 
     no.dupes.list[[i]] <- list142
-    }
+  }
 }   
 
 #BNBBTC: 5,6
@@ -314,11 +314,11 @@ no.dupes.list[[21]][[6]] <- no.dupes.list[[22]][[3]]
 #Xrpbtc: 31 4 parts
 #XEMbtc: 32 1 part
 
-#1-1ETHUSDT, 1-2BNBUSDT, 3-20BTCUSDT, 4 ETHUSDT, 5BNBYSDT, 6BNBBTC, 7ETHBTC, 9ADABTC, 11EOSBTC, 13IOTABTC, 15NEOBTC, 16XLMBTC, 14TRXBTC,21BTCUSDT, 23->32: BCC, ICX, LTC, NANO, OMG, ONT, VEN, XMR, XRP, XEM
-paircombo.list <- list(no.dupes.list[[1]],no.dupes.list[[2]],no.dupes.list[[20]],no.dupes.list[[3]],no.dupes.list[[4]],no.dupes.list[[5]],no.dupes.list[[7]],no.dupes.list[[9]],no.dupes.list[[11]],no.dupes.list[[13]],no.dupes.list[[15]],no.dupes.list[[16]],no.dupes.list[[17]], no.dupes.list[[21]], no.dupes.list[[23]], no.dupes.list[[24]], no.dupes.list[[25]], no.dupes.list[[26]], no.dupes.list[[27]], no.dupes.list[[28]], no.dupes.list[[29]], no.dupes.list[[30]], no.dupes.list[[31]], no.dupes.list[[32]])
+#1-1ETHUSDT, 1-2BNBUSDT, 3-20BTCUSDT, 4 ETHUSDT, 5BNBYSDT, 6BNBBTC, 7ETHBTC, 9ADABTC, 11EOSBTC, 13IOTABTC, 15NEOBTC, 17XLMBTC, 16TRXBTC,21BTCUSDT, 23->32: BCC, ICX, LTC, NANO, OMG, ONT, VEN, XMR, XRP, XEM
+paircombo.list <- list(no.dupes.list[[1]],no.dupes.list[[2]],no.dupes.list[[20]],no.dupes.list[[3]],no.dupes.list[[4]],no.dupes.list[[5]],no.dupes.list[[7]],no.dupes.list[[9]],no.dupes.list[[11]],no.dupes.list[[13]],no.dupes.list[[15]],no.dupes.list[[17]], no.dupes.list[[21]])# (HAVE ALSO CUT trx), no.dupes.list[[23]], no.dupes.list[[24]], no.dupes.list[[25]], no.dupes.list[[26]], no.dupes.list[[27]], no.dupes.list[[28]], no.dupes.list[[29]], no.dupes.list[[30]], no.dupes.list[[31]], no.dupes.list[[32]])
 
 finalsets <- list() #pair DF list
-for (i in 1:24){
+for (i in 1:length(paircombo.list)){
   print(i)
   if(i == 1){
     print('running 60')
@@ -378,7 +378,8 @@ for (i in 1:24){
       finalsets[[i]] <- temp6df[[1]][[1]]   
       finalsets[[24]] <- temp6df[[1]][[2]]
     }
-  } }#add to finalsets list
+  } 
+}#add to finalsets list
 
 finalsets2 <- finalsets
 #now combine ETHUSDT (1,4), BNBUSDT (2,5) BTCUSDTs (3,14)
@@ -394,10 +395,10 @@ for(i in 1:3){
   if(i == 3){
     for(j in 1:6){
       print(dim(finalsets2[[i]][[j]]))
-      finalsets2[[i]][[j]] <- rbind(finalsets[[3]][[j]], finalsets[[14]][[j]])     }  }  }
+      finalsets2[[i]][[j]] <- rbind(finalsets[[3]][[j]], finalsets[[13]][[j]])     }  }  }
 
-finalsets11 <- list(finalsets2[[1]], finalsets2[[2]], finalsets2[[3]], finalsets2[[6]], finalsets2[[7]], finalsets2[[8]], finalsets2[[9]], finalsets2[[10]], finalsets2[[11]], finalsets2[[12]], finalsets2[[14]], finalsets2[[15]], finalsets2[[16]], finalsets2[[17]], finalsets2[[18]], finalsets2[[19]], finalsets2[[20]], finalsets2[[21]], finalsets2[[22]], finalsets2[[23]], finalsets2[[24]])
-dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC', 'TRXBTC', 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
+finalsets11 <- list(finalsets2[[1]], finalsets2[[2]], finalsets2[[3]], finalsets2[[6]], finalsets2[[7]], finalsets2[[8]], finalsets2[[9]], finalsets2[[10]], finalsets2[[11]], finalsets2[[12]])#, finalsets2[[15]], finalsets2[[16]], finalsets2[[17]], finalsets2[[18]], finalsets2[[19]],# finalsets2[[20]], finalsets2[[21]], finalsets2[[22]], finalsets2[[23]], finalsets2[[24]])
+dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC')#, 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
 
 
 
@@ -447,8 +448,3 @@ for(Npair in 1:21){
 e]], file=csvname)
 
 }
-
-
-
-
-

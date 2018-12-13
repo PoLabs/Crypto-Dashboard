@@ -22,10 +22,10 @@ shinyUI(fluidPage(
                 dashboardSidebar(
                   sidebarMenu(
                     menuItem("Dashboard", tabName='dashboard', icon=icon('dashboard')),
-                    selectInput('exchangeInputA', label='Exchange A', choices=c('binance', 'bitfinex'), selected = 'binance'),
+                    selectInput('exchangeInputA', label='Exchange A', choices=c('binance'), selected = 'binance'),  #, 'bitfinex'
                     uiOutput("pair.controlsA"),
                     br(),br(),
-                    selectInput('exchangeInputB', label='Exchange B', choices=c('binance', 'bitfinex'), selected = 'binance'),
+                    selectInput('exchangeInputB', label='Exchange B', choices=c('binance'), selected = 'binance'),  #, 'bitfinex')
                     uiOutput("pair.controlsB"),        
                     menuItem("Documentation", tabName = 'Documentation'),
                     menuItem("Donate", tabName = 'Donate')

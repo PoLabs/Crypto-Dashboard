@@ -66,14 +66,14 @@ shinyServer(function(input, output){
   output$pair.controlsA <- renderUI({
     exUIA <- exchangeA()
     if(exUIA %in% c('binance', 'Binance')){      #render binance pairs
-      selectInput('pairAInput', label='Pair A', choices=c('ADABTC', 'BCCBTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTC'), selected = 'BTCUSDT')
-      }else{      #render bitfinex pairs
+      selectInput('pairAInput', label='Pair A', choices=c('ADABTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'IOTABTC', 'NEOBTC', 'TRXBTC', 'XLMBTC'), selected = 'BTCUSDT')
+      }else{      #render bitfinex pairs#'ADABTC', 'BCCBTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTC'
       selectInput('pairAInput', label='Pair A', choices=c('BCHUSD', 'BTCUSD', 'EOSUSD', 'ETHUSD', 'LTCUSD', 'XRPUSD'), selected = 'BTCUSD')    }  })   #variable selection A
   
   output$pair.controlsB <- renderUI({
     exUIB <- exchangeB()
     if(exUIB %in% c('binance')){      #render binance pairs
-      selectInput('pairBInput', label='Pair B', choices=c('ADABTC', 'BCCBTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTC'), selected = 'BTCUSDT')
+      selectInput('pairBInput', label='Pair B', choices=c('ADABTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'IOTABTC', 'NEOBTC', 'TRXBTC', 'XLMBTC'), selected = 'BTCUSDT')
     }else{      #render bitfinex pairs
       selectInput('pairBInput', label='Pair B', choices=c('BCHUSD', 'BTCUSD', 'EOSUSD', 'ETHUSD', 'LTCUSD', 'XRPUSD'), selected = 'BTCUSD')    }  })   #variable selection B
   

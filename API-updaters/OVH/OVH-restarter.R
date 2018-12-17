@@ -136,6 +136,17 @@ for(Cpair in pair.vector){
     rm(KlinesResp.df, BookResp.df, DepthData, BookResp, KlinesResp)
   }
   
+  
+  
+  #add in aws data
+  old.location <- paste0("/root/cryptoAPI/aws-api/small", Cpair, ".csv")
+  OldData.aws <- as.data.frame(fread(old.location))
+  print(dim(OldData.aws))
+  print(dim(BinanceData.f))
+  BinanceData.f <- rbind(OldData.aws[1:(nrow(OldData.aws)-400),1:ncol(BinanceData.f)], BinanceData.f)
+  
+  
+  
   print('feature engineering time')
   ###############################
   #Feature Engineering#
@@ -179,7 +190,7 @@ for(Cpair in pair.vector){
   BinanceData.f$MACDspreadE <- MACDspreadE[,1]
   
   ###############################
-  csvfolder <- paste0("full/small", Cpair, ".csv")
+  csvfolder <- paste0(Cpair, "/CSV/small", Cpair, ".csv")
   fwrite(BinanceData.f, file = csvfolder)
 }
 

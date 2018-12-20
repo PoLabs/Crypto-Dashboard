@@ -5,6 +5,10 @@ n <- 4
 options("scipen"=100, "digits"=4)
 exUIA <- 'binance'
 exUIB <- 'binance'
+nameA <-'BTCUSDT'
+nameB <- 'BTCUSDT'
+timeA <- 30
+timeB <- 30
 #feature engineering
 feat.engineer <- function(PAIRdata){
   PAIRdata$SMA12close <- SMA(PAIRdata$PAIRclose, n = 6)
@@ -46,52 +50,60 @@ shinyServer(function(input, output){
   exchangeB <- reactive({as.character(input$exchangeInputB)})
   nameA <- reactive({as.character(input$pairAInput)})
   nameB <- reactive({as.character(input$pairBInput)})
+  # timeA <- reactive({as.numeric(input$pair.timeA)})
+  # timeB <- reactive({as.numeric(input$pair.timeB)})
   pairA <- reactive({as.data.frame(fread(paste0('/home/ubuntu/crypto/', nameA(), "/small", nameA(), ".csv")))})
   pairB <- reactive({as.data.frame(fread(paste0('/home/ubuntu/crypto/', nameB(), "/small", nameB(), ".csv")))})#rawToChar(get_object(paste0("s3://polabs-datasets/", exchangeB(), "-", input$pairBInput, "/small", input$pairBInput, ".csv")))))})
   nlpA <- reactive({as.data.frame(fread(paste0(nameA(), "/sync/tracker.csv")))})#rawToChar(get_object(paste0("s3://polabs-datasets/", exchangeA(), "-", input$pairAInput, "/sync/tracker.csv")))))})
   nlpB <- reactive({as.data.frame(fread(paste0(nameB(), "/sync/tracker.csv")))})#rawToChar(get_object(paste0("s3://polabs-datasets/", exchangeB(), "-", input$pairBInput, "/sync/tracker.csv")))))})
   
   output$pair.varsA <- renderUI({
-    exUIA <- exchangeA()
+    #exUIA <- exchangeA()
     if(exUIA %in% c('binance')){
       selectInput('varselectA', label='Binance variables: ', choices=c('Close'='PAIRclose', 'NLP sentiment'='raw.sent', 'NLP sentiment (weighted)'='comment.sent',  'Volume'='PAIRvolume', 'n Trades'='PAIRntrade','High'='PAIRhigh', 'Low'='PAIRlow', 'Bid'='PAIRbid', 'Ask'='PAIRask', 'SMA12close'='SMA12close', 'SMA144close'='SMA36close', 'SMA12spread'='SMA12spread', 'SMA12btcclose'='SMA12btcclose',  'EMA12close'='EMA12close', 'EMA144close'='EMA36close', 'EMA12vol'='EMA12vol', 'EMA144vol'='EMA36vol', 'EMA12spread'='EMA12spread', 'EVWMA12close'='EVWMA12close', 'VWAP12close'='VWAP12close', 'VWAP144close'='VWAP36close', 'HMA12close'='HMA12close', 'HMA144close'='HMA36close',                                                                 'HMA12vol'='HMA12vol', 'HMA144vol'='HMA36vol', 'RSIPAIR12'='RSIPAIR12', 'RSIPAIR144'='RSIPAIR36', 'MACDpriceE'='MACDpriceE','MACDvolE'='MACDvolE', 'MACDspreadE'='MACDspreadE'), selected='PAIRclose')
     }else{selectInput('varselectA', label='Bitfinex variables: ', choices=c('Open'='PAIRopen',	'Volume'='PAIRvolume','NLP sentiment'='raw.sent', 'NLP sentiment (weighted)'='comment.sent','Close'='PAIRclose', 'High'='PAIRhigh',	'Low'='PAIRlow',	'delta open>close' ='PAIRd', 'Bid'='PAIRbid', 'Ask'='PAIRask',	'Spread'='PAIRbaspread',	'Bid spread'='PAIRbidspread',	'Ask spread'='PAIRaskspread'), selected='PAIRclose')  }})      #pairs in exchange A
   
   output$pair.varsB <- renderUI({
-    exUIB <- exchangeB()
+    #exUIB <- exchangeB()
     if(exUIB %in% c('binance', 'Binance')){
       selectInput('varselectB', label='Binance variables: ', choices=c('Close'='PAIRclose', 'NLP sentiment'='raw.sent', 'NLP sentiment (weighted)'='comment.sent','Volume'='PAIRvolume', 'n Trades'='PAIRntrade', 'High'='PAIRhigh', 'Low'='PAIRlow', 'Bid'='PAIRbid', 'Ask'='PAIRask', 'SMA12close'='SMA12close', 'SMA144close'='SMA36close', 'SMA12spread'='SMA12spread', 'SMA12btcclose'='SMA12btcclose',  'EMA12close'='EMA12close', 'EMA144close'='EMA36close', 'EMA12vol'='EMA12vol', 'EMA144vol'='EMA36vol', 'EMA12spread'='EMA12spread', 'EVWMA12close'='EVWMA12close', 'VWAP12close'='VWAP12close', 'VWAP144close'='VWAP36close', 'HMA12close'='HMA12close', 'HMA144close'='HMA36close',                                                                 'HMA12vol'='HMA12vol', 'HMA144vol'='HMA36vol', 'RSIPAIR12'='RSIPAIR12', 'RSIPAIR144'='RSIPAIR36', 'MACDpriceE'='MACDpriceE','MACDvolE'='MACDvolE', 'MACDspreadE'='MACDspreadE'), selected='PAIRclose')
     }else{selectInput('varselectB', label='Bitfinex variables: ', choices=c('Open'='PAIRopen','Volume'='PAIRvolume', 'NLP sentiment'='raw.sent', 'NLP sentiment (weighted)'='comment.sent', 'Close'='PAIRclose', 'High'='PAIRhigh',	'Low'='PAIRlow',	 'delta open>close' ='PAIRd', 'Bid'='PAIRbid', 'Ask'='PAIRask',	'Spread'='PAIRbaspread',	'Bid spread'='PAIRbidspread',	'Ask spread'='PAIRaskspread'), selected='PAIRclose')  }})       #pairs for exchange B
   
   output$pair.controlsA <- renderUI({
-    exUIA <- exchangeA()
-    if(exUIA %in% c('binance', 'Binance')){      #render binance pairs
+    #exUIA <- exchangeA()
+    #if(exUIA %in% c('binance', 'Binance')){      #render binance pairs
       selectInput('pairAInput', label='Pair A', choices=c('ADABTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'IOTABTC', 'NEOBTC', 'TRXBTC', 'XLMBTC'), selected = 'BTCUSDT')
-      }else{      #render bitfinex pairs#'ADABTC', 'BCCBTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTC'
-      selectInput('pairAInput', label='Pair A', choices=c('BCHUSD', 'BTCUSD', 'EOSUSD', 'ETHUSD', 'LTCUSD', 'XRPUSD'), selected = 'BTCUSD')    }  })   #variable selection A
+     # }else{      #render bitfinex pairs#'ADABTC', 'BCCBTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'ICXBTC', 'IOTABTC', 'LTCBTC', 'NANOBTC', 'NEOBTC', 'OMGBTC', 'ONTBTC', 'TRXBTC', 'VENBTC', 'XEMBTC', 'XLMBTC', 'XMRBTC', 'XRPBTC'
+     }) #selectInput('pairAInput', label='Pair A', choices=c('BCHUSD', 'BTCUSD', 'EOSUSD', 'ETHUSD', 'LTCUSD', 'XRPUSD'), selected = 'BTCUSD')    }  })   #variable selection A
   
   output$pair.controlsB <- renderUI({
-    exUIB <- exchangeB()
-    if(exUIB %in% c('binance')){      #render binance pairs
+    #exUIB <- exchangeB()
+    #if(exUIB %in% c('binance')){      #render binance pairs
       selectInput('pairBInput', label='Pair B', choices=c('ADABTC', 'BNBBTC', 'BNBUSDT', 'BTCUSDT', 'EOSBTC', 'ETHBTC', 'ETHUSDT', 'IOTABTC', 'NEOBTC', 'TRXBTC', 'XLMBTC'), selected = 'BTCUSDT')
-    }else{      #render bitfinex pairs
-      selectInput('pairBInput', label='Pair B', choices=c('BCHUSD', 'BTCUSD', 'EOSUSD', 'ETHUSD', 'LTCUSD', 'XRPUSD'), selected = 'BTCUSD')    }  })   #variable selection B
+    #}else{      #render bitfinex pairs
+    })  #selectInput('pairBInput', label='Pair B', choices=c('BCHUSD', 'BTCUSD', 'EOSUSD', 'ETHUSD', 'LTCUSD', 'XRPUSD'), selected = 'BTCUSD')    }  })   #variable selection B
+  
+  # output$pair.timeA <- renderUI({  #   numericInput('pair.timeA', label='Pair A time', value=30, min=15, max=150)  })
+  # output$pair.timeB <- renderUI({  #   numericInput('pair.timeB', label='Pair B time', value=30, min=15, max=150)  })
   
   output$plot1 <- renderPlot({
     n <- input$varselectA
+    d <- as.numeric(input$pair.timeA)
+    #plottimeA <- timeA()*1440
     if(n %in% c('raw.sent', 'comment.sent')){
       nlpA.df <- nlpA()
-      plot(x=c(1:nrow(nlpA.df)), y=nlpA.df[[n]], type = "l", main=input$pairAInput, ylab='', xlab=paste0('Last ', round((nrow(nlpA.df)/24),1), ' days in 1hr intervals'))
+      plot(x=c(1:(d*24)), y=as.data.frame(nlpA.df[[n]])[(nrow(nlpA.df)-(d*24)+1):nrow(nlpA.df),], type = "l", main=input$pairAInput, ylab='', xlab=paste0('Last ', d, ' days in 1hr intervals'))#round((nrow(nlpA.df)/24),1)
     }else{pairA.df <- pairA()
-    plot(x=c(1:nrow(pairA.df)), y=pairA.df[[n]], type = "l", main=input$pairAInput, ylab='', xlab=paste0('Past ', round((nrow(pairA.df)/288),1), 'days in 5min intervals'))} }) # plot A
+    plot(x=c(1:(d*288)), y=as.data.frame(pairA.df[[n]])[(nrow(pairA.df)-(d*288)+1):nrow(pairA.df),], type = "l", main=input$pairAInput, ylab='', xlab=paste0('Last ', d, ' days in 5min intervals' ))} }) # plot A   #paste0('Past ', round((nrow(pairA.df)/288),1), 'days in 5min intervals')
   
   output$plot2 <- renderPlot({
     n <- input$varselectB
+    d <- as.numeric(input$pair.timeB)
     if(n %in% c('raw.sent', 'comment.sent')){
       nlpB.df <- nlpB()
-      plot(x=c(1:nrow(nlpB.df)), y=nlpB.df[[n]], type = "l", main=input$pairBInput, ylab='', xlab=paste0('Last ', round((nrow(nlpB.df)/24),1), ' days in 1hr intervals'))
+      plot(x=c(1:(d*24)), y=as.data.frame(nlpB.df[[n]])[(nrow(nlpB.df)-(d*24)+1):nrow(nlpB.df),], type = "l", main=input$pairBInput, ylab='', xlab=paste0('Last ', d, ' days in 1hr intervals'))#round((nrow(nlpA.df)/24),1)
     }else{pairB.df <- pairB()
-    plot(x=c(1:nrow(pairB.df)), y=pairB.df[[n]], type = "l", main=input$pairBInput, ylab='', xlab=paste0('Past ', round((nrow(pairB.df)/288),1), 'days in 5min intervals'))} }) # plot B
+    plot(x=c(1:(d*288)), y=as.data.frame(pairB.df[[n]])[(nrow(pairB.df)-(d*288)+1):nrow(pairB.df),], type = "l", main=input$pairBInput, ylab='', xlab=paste0('Last ', d, ' days in 5min intervals' ))} }) # plot A   #paste0('Past ', round((nrow(pairA.df)/288),1), 'days in 5min intervals')
   
   output$modellistA <- renderUI({
     #look into folder for models, make choices vector
@@ -120,7 +132,7 @@ shinyServer(function(input, output){
     }else{    Btext <- paste0(input$pairBInput, ': ', n, ' currently at ', as.character(pairB.df[nrow(pairB.df),n]))}  })    # current text A
   
   output$NLPplot1 <- renderPlot({
-    exUIA <- exchangeA()
+    #exUIA <- 'Binance'#exchangeA()
     if(input$pairAInput %in% c('IOTABTC', 'NANOBTC')){
       coin <- substring(input$pairAInput, 0, 4)
     }else{coin <- substring(input$pairAInput, 0, 3)}
@@ -135,7 +147,7 @@ shinyServer(function(input, output){
   })    #word cloud A
   
   output$NLPplot2 <- renderPlot({
-    exUIB <- exchangeB()
+    #exUIB <- 'Binance'#exchangeB()
     if(input$pairBInput %in% c('IOTABTC', 'NANOBTC')){
       coin <- substring(input$pairBInput, 0, 4)
     }else{coin <- substring(input$pairBInput, 0, 3)}

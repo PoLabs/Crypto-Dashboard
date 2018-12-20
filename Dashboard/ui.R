@@ -22,11 +22,14 @@ shinyUI(fluidPage(
                 dashboardSidebar(
                   sidebarMenu(
                     menuItem("Dashboard", tabName='dashboard', icon=icon('dashboard')),
-                    selectInput('exchangeInputA', label='Exchange A', choices=c('binance'), selected = 'binance'),  #, 'bitfinex'
+                    #selectInput('exchangeInputA', label='Exchange A', choices=c('binance'), selected = 'binance'),  #, 'bitfinex'
+                    
                     uiOutput("pair.controlsA"),
+                    numericInput('pair.timeA', label='Time period A', value=30, min=15, max=150),
                     br(),br(),
-                    selectInput('exchangeInputB', label='Exchange B', choices=c('binance'), selected = 'binance'),  #, 'bitfinex')
-                    uiOutput("pair.controlsB"),        
+                    #selectInput('exchangeInputB', label='Exchange B', choices=c('binance'), selected = 'binance'),  #, 'bitfinex')
+                    uiOutput("pair.controlsB"),    
+                    numericInput('pair.timeB', label='Time period B', value=30, min=15, max=150),
                     menuItem("Documentation", tabName = 'Documentation'),
                     menuItem("Donate", tabName = 'Donate')
                   )),
@@ -36,7 +39,7 @@ shinyUI(fluidPage(
                     tabItem(tabName = "dashboard",  
                             fluidRow(
                               box(status='primary', width=6, solidHeader = T, uiOutput("pair.varsA") ),
-                              box(status='primary', width=6, solidHeader = T, uiOutput("pair.varsB") ) ),
+                              box(status='primary', width=6, solidHeader = T, uiOutput("pair.varsB") )      ),
                             fluidRow(                  
                               box(status="primary", solidHeader = F, plotOutput("plot1"), textOutput('textout1') ),
                               box(status="primary", solidHeader = F, plotOutput("plot2"), textOutput('textout2') ) ),

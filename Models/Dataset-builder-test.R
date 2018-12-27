@@ -120,11 +120,11 @@ Ybuilder.list.singles <- function(pairlist, frame){
     L24$Yn5 <- ifelse (L24$lag24percent < 0-money5, 1, 0)
     L24$Yn1 <- ifelse (L24$lag24percent < money1, 1, 0)
     L24$Yn2 <- ifelse (L24$lag24percent < 0-money2, 1, 0)    
-    L24.list[[dset]] <- L24  }
+    L24.list[[dset]] < - L24  }
   for (dset in 1:length(pairlist)){
     Y.list <- list()   #build new df with BinanceData and future vector --->  
     A1.df <- cbind(L24.list[[dset]]$Y5, pairlist[[dset]][1:(nrow(pairlist[[dset]])-24), ])   
-    names(A1.df)[1] <- "A1"
+    names(A1.df)[1] <- "A1" 
     A1.df <- A1.df[sample(nrow(A1.df)),]#shuffle
     Y.list[[1]] <- A1.df  
     A2.df <- cbind(L24.list[[dset]]$Y1, pairlist[[dset]][1:(nrow(pairlist[[dset]])-24), ]) 
@@ -154,7 +154,7 @@ Ybuilder.list.singles <- function(pairlist, frame){
   #if frame = 60combine different: 60 will be list of 3 lists of 6df, others are just list of 6df
   dataset.list <- list()  #combine datasets  (Y.df.list is a list of X length of 6 datasets
   # if(frame == 60){
-  dataset.list <- list(Y.df.list)
+  dataset.list <- Y.df.list
   # }
   # if(frame == 12){
   #   for(y in 1:6){
@@ -205,7 +205,7 @@ TRXBTC.old5min.df <- fread(file='TRXBTC-oldBOX.csv')#19
 BTCUSDT.old5min.df <-fread(file='BTCUSDT-old5mins.csv')#20 fuckedf
 BTCUSDT.new1min.df <- fread(file='BTCUSDT-new1mins.csv')#21
 BTCUSDT.new5min.df <- fread(file='12.09.2018/smallBTCUSDT.csv')#22
-BTCUSDT.new5min.df <- BTCUSDT.new5min.df[1:(nrow(BTCUSDT.new5min.df)-4000),]
+BTCUSDT.new5min.df <- BTCUSDT.new5min.df[(nrow(BTCUSDT.new5min.df)-4000):nrow(BTCUSDT.new5min.df),]
 #newer
 BCCBTC.new5min.df <- fread(file='12.09.2018/smallBCCBTC.csv')#22
 BCCBTC.new5min.df <- BCCBTC.new5min.df[1:(nrow(BCCBTC.new5min.df)-4000),]
@@ -252,17 +252,17 @@ for (i in 1:32){    dupes.list[[i]] <- which(duplicated(datasetlist[[i]]) | dupl
 #check 23->31
 
 no.dupes.list <- list()
-no.dupes.list[[1]] <- datasetlist[[3]]
-no.dupes.list[[2]] <- datasetlist[[4]]
-no.dupes.list[[3]] <- datasetlist[[6]]
-no.dupes.list[[4]] <- datasetlist[[8]]
-no.dupes.list[[5]] <- datasetlist[[10]]
-no.dupes.list[[6]] <- datasetlist[[12]]
-no.dupes.list[[7]] <- datasetlist[[14]]
-no.dupes.list[[8]] <- datasetlist[[15]]
-no.dupes.list[[9]] <- datasetlist[[16]]
-no.dupes.list[[10]] <- datasetlist[[17]]
-no.dupes.list[[11]] <- datasetlist[[21]]
+no.dupes.list[[1]] <- datasetlist[[3]]   #BNBUSDT
+no.dupes.list[[2]] <- datasetlist[[4]]   #ETHUSDT
+no.dupes.list[[3]] <- datasetlist[[6]]  #BNBTC
+no.dupes.list[[4]] <- datasetlist[[8]]    #ETHBTC
+no.dupes.list[[5]] <- datasetlist[[10]]   #ADABTC
+no.dupes.list[[6]] <- datasetlist[[12]]   #EOSBTC
+no.dupes.list[[7]] <- datasetlist[[14]]    #IOTABTC
+no.dupes.list[[8]] <- datasetlist[[15]]    #NEOBTC
+no.dupes.list[[9]] <- datasetlist[[16]]    #TRX
+no.dupes.list[[10]] <- datasetlist[[17]]   #xlm
+no.dupes.list[[11]] <- datasetlist[[21]]   #btc
 
 paircombo.list <- no.dupes.list
 
@@ -370,9 +370,11 @@ for (i in 1:length(paircombo.list)){
     # if(i == 18){
     #   twelve.listA <- list(paircombo.list[[18]], paircombo.list[[24]])
     # }else{    
-      twelve.listA <- paircombo.list[[i]] 
+      twelve.listA <- list()
+      twelve.listA[[1]] <- paircombo.list[[i]] 
+      twelve.listA[[2]] <- paircombo.list[[i]] 
       #}
-    print(length(twelve.listA))
+    print(paste0('length 12.list ', length(twelve.listA)))
     twelve.list <- lapply(twelve.listA, function(x) aggregate(.~ cbind(grp = as.integer(gl(nrow(x), n, nrow(x)))), x, mean)[-1])
     for (dset in 1:length(twelve.listA)){
       v.ntrade <- aggregate(twelve.listA[[dset]][,7],list(rep(1:(nrow(twelve.listA[[dset]])%/%n+1),each=n,len=nrow(twelve.listA[[dset]]))),sum)
@@ -386,8 +388,10 @@ for (i in 1:length(paircombo.list)){
     for(dset in 1:length(twelve.list)){  #remove NA
       twelve.list[[dset]] <- twelve.list[[dset]][complete.cases(twelve.list[[dset]]),]  }
     print('feat eng fine')
+    
     #if(i != 18){
-      temp6df <- Ybuilder.list.singles(twelve.list, 12)#offset for Y, build dfs
+      temp6df <- Ybuilder.list(twelve.list, 12)#offset for Y, build dfs
+      print(paste0('length temp6df: ', length(temp6df)))
       for(dset in 1:length(temp6df)){#clean NA again
         temp6df[[dset]] <- temp6df[[dset]][complete.cases(temp6df[[dset]]),]  }
       finalsets[[i]] <- temp6df   
@@ -423,7 +427,7 @@ finalsets11 <- finalsets
 #       finalsets2[[i]][[j]] <- rbind(finalsets[[3]][[j]], finalsets[[13]][[j]])     }  }  }
 
 # finalsets11 <- list(finalsets2[[1]], finalsets2[[2]], finalsets2[[3]], finalsets2[[6]], finalsets2[[7]], finalsets2[[8]], finalsets2[[9]], finalsets2[[10]], finalsets2[[11]], finalsets2[[12]])#, finalsets2[[15]], finalsets2[[16]], finalsets2[[17]], finalsets2[[18]], finalsets2[[19]],# finalsets2[[20]], finalsets2[[21]], finalsets2[[22]], finalsets2[[23]], finalsets2[[24]])
-dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'XLMBTC')#, 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
+dfname.vector <- c('BNBUSDT', 'ETHUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'TRXBTC', 'XLMBTC', 'BTCUSDT')#, 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
 
 
 
@@ -466,7 +470,7 @@ dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC'
 for(Npair in 1:11){
   for(frame in 1:6){
     #build csv file name
-    csvname <- paste0('12.09.2018/datasets/test sets/', dfname.vector[Npair], '-a', frame, '.csv')
+    csvname <- paste0('/home/polabs1/Crypto/12.09.2018/datasets/', dfname.vector[Npair], '-a', frame, '.csv')
     #save
     fwrite(finalsets11[[Npair]][[frame]], file=csvname)
   }
@@ -481,9 +485,9 @@ for(Npair in 1:11){
 
 
 
-
-
-library(ggplot2)
-ggplot(data=as.data.frame(finalsets11[[3]][1]), aes(x=1:nrow(as.data.frame(finalsets11[[3]][1])), y=as.data.frame(finalsets11[[3]][1])[,4]   )) +
-    geom_line()+
-    geom_point()
+ 
+ 
+ library(ggplot2)
+ ggplot(data=as.data.frame(finalsets11[[11]][1]), aes(x=1:nrow(as.data.frame(finalsets11[[11]][1])), y=as.data.frame(finalsets11[[11]][1])[,4]   )) +
+     geom_line()+
+     geom_point()

@@ -448,9 +448,9 @@ dfname.vector <- c('ETHUSDT', 'BNBUSDT', 'BTCUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC'
 for(Npair in 1:10){
   for(frame in 1:6){
     #build csv file name
-    csvname <- paste0('12.09.2018/datasets/', dfname.vector[Npair], '-a', frame, '.csv')
+    csvname <- paste0('12.09.2018/train sets/', dfname.vector[Npair], '-a', frame, '.csv')
     #save
-    fwrite(finalsets11[[Npair]][[frame]], file=csvname)
+    fwrite(as.data.frame(finalsets11[[Npair]][frame]), file=csvname)
   }
 }
 
@@ -463,9 +463,9 @@ for(Npair in 1:10){
 
 
 
-
-
-library(ggplot2)
-ggplot(data=as.data.frame(finalsets11[[3]][1]), aes(x=1:nrow(as.data.frame(finalsets11[[3]][1])), y=as.data.frame(finalsets11[[3]][1])[,4]   )) +
-    geom_line()+
-    geom_point()
+# 
+# 
+# library(ggplot2)
+# ggplot(data=as.data.frame(finalsets11[[3]][1]), aes(x=1:nrow(as.data.frame(finalsets11[[3]][1])), y=as.data.frame(finalsets11[[3]][1])[,4]   )) +
+#     geom_line()+
+#     geom_point()

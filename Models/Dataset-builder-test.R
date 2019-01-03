@@ -266,114 +266,15 @@ no.dupes.list[[11]] <- datasetlist[[21]]   #btc
 
 paircombo.list <- no.dupes.list
 
-# no.dupes.list <- list()
-# for (i in 1:32){
-#   if (i == 1 | i == 2 | i == 5 | i == 20 | i == 6 | i == 8 | i == 14 | i == 26 | i == 32){ #no dupes
-#     if(i ==5){   no.dupes.list[[i]] <- list(datasetlist[[i]], datasetlist[[i]])   
-#     }else{     no.dupes.list[[i]] <- datasetlist[[i]] } }
-#   #3 and 5: 3, 4, 6, 8 also 21,22
-#   if(i == 3 | i == 4 | i == 21 | i == 22 ){
-#     list35 <- list(datasetlist[[i]][1:3430,], datasetlist[[i]][3870:5720,], datasetlist[[i]][5810:35700,], datasetlist[[i]][35750:43140,], datasetlist[[i]][43240:nrow(datasetlist[[i]]),] )  
-#     no.dupes.list[[i]] <- list35 }
-#   #7 and 8: 7, 9, 11, 13 also 18, 19, 
-#   if(i == 7 | i == 9 | i == 11 | i == 13 | i == 18 | i == 19){ 
-#     list78 <- list(datasetlist[[i]][1:7650,], datasetlist[[i]][8570:nrow(datasetlist[[i]]),])
-#     no.dupes.list[[i]] <- list78  }
-#   #1 and 3: 14:17, 12, 10, 
-#   if(i == 15 | i == 16 | i == 17 | i == 10 | i == 12){
-#     list13 <- list(datasetlist[[i]][1:1260,], datasetlist[[i]][1700:3535,], datasetlist[[i]][3635:33540,], datasetlist[[i]][33600:40980,], datasetlist[[i]][41075:nrow(datasetlist[[i]]),])
-#     no.dupes.list[[i]] <- list13
-#   }
-#   if(i == 23 | i == 25 | i == 29 | i == 30 | i == 31){
-#     list61k2k <- list(datasetlist[[i]][1:601,], datasetlist[[i]][1023:2865,], datasetlist[[i]][2960:nrow(datasetlist[[i]]),])# datasetlist[[i]][710:1008,], 
-#     no.dupes.list[[i]] <- list61k2k
-#   }
-#   if(i == 24 | i == 27 | i == 28){
-#     list142 <- list(datasetlist[[i]][430:2275,], datasetlist[[i]][2365:nrow(datasetlist[[i]]),])#datasetlist[[i]][115:410,], 
-#     no.dupes.list[[i]] <- list142
-#   }
-# }   
-# 
-# #BNBBTC: 5,6
-# no.dupes.list[[5]][[2]] <- no.dupes.list[[6]]
-# #ETHBTC: 7, 8
-# no.dupes.list[[7]][[3]] <- no.dupes.list[[8]]
-# #ADABTC: 9, 10
-# no.dupes.list[[9]][[3]] <- no.dupes.list[[10]][[1]]
-# no.dupes.list[[9]][[4]] <- no.dupes.list[[10]][[2]]
-# no.dupes.list[[9]][[5]] <- no.dupes.list[[10]][[3]]
-# no.dupes.list[[9]][[6]] <- no.dupes.list[[10]][[4]]
-# no.dupes.list[[9]][[7]] <- no.dupes.list[[10]][[5]]
-# #EOSBTC: 11,12 
-# no.dupes.list[[11]][[3]] <- no.dupes.list[[12]][[1]]
-# no.dupes.list[[11]][[4]] <- no.dupes.list[[12]][[2]]
-# no.dupes.list[[11]][[5]] <- no.dupes.list[[12]][[3]]
-# no.dupes.list[[11]][[6]] <- no.dupes.list[[12]][[4]]
-# no.dupes.list[[11]][[7]] <- no.dupes.list[[12]][[5]]
-# #iotabtc: 13,14
-# no.dupes.list[[13]][[3]] <- no.dupes.list[[14]]
-# #xlmbtc: 17,18
-# no.dupes.list[[17]][[6]] <- no.dupes.list[[18]][[1]]
-# no.dupes.list[[17]][[7]] <- no.dupes.list[[18]][[2]]
-# #trxbtc: 16 19
-# no.dupes.list[[16]][[6]] <- no.dupes.list[[19]][[1]]
-# no.dupes.list[[16]][[7]] <- no.dupes.list[[19]][[2]]
-# #btcusdt: (20),21,22
-# no.dupes.list[[21]][[7]] <- no.dupes.list[[22]][[1]]
-# no.dupes.list[[21]][[8]] <- no.dupes.list[[22]][[2]]
-# no.dupes.list[[21]][[9]] <- no.dupes.list[[22]][[3]]
-# no.dupes.list[[21]][[10]] <- no.dupes.list[[22]][[4]]
-# no.dupes.list[[21]][[11]] <- no.dupes.list[[22]][[5]]
-
-#bccbtc: 23 4parts
-#icxbtc: 24 3parts
-#ltcbtc:25 4 parts
-#nanobtc: 26 1 part
-#omgbtc: 27 3 parts
-#ontbtc: 28 3parts
-#venbtc: 29 4parts
-#XMRbtc: 30 4 parts
-#Xrpbtc: 31 4 parts
-#XEMbtc: 32 1 part
-
-#1-1ETHUSDT, 1-2BNBUSDT, 3-20BTCUSDT, 4 ETHUSDT, 5BNBUSDT, 6BNBBTC, 7ETHBTC, 9ADABTC, 11EOSBTC, 13IOTABTC, 15NEOBTC, 17XLMBTC, 16TRXBTC,21BTCUSDT, 23->32: BCC, ICX, LTC, NANO, OMG, ONT, VEN, XMR, XRP, XEM
-# paircombo.list <- list(no.dupes.list[[1]],no.dupes.list[[2]],no.dupes.list[[20]],no.dupes.list[[3]],no.dupes.list[[4]],no.dupes.list[[5]],no.dupes.list[[7]],no.dupes.list[[9]],no.dupes.list[[11]],no.dupes.list[[13]],no.dupes.list[[15]],no.dupes.list[[17]], no.dupes.list[[22]])# (HAVE ALSO CUT trx), no.dupes.list[[23]], no.dupes.list[[24]], no.dupes.list[[25]], no.dupes.list[[26]], no.dupes.list[[27]], no.dupes.list[[28]], no.dupes.list[[29]], no.dupes.list[[30]], no.dupes.list[[31]], no.dupes.list[[32]])
 
 finalsets <- list() #pair DF list
 for (i in 1:length(paircombo.list)){
   print(i)
-  # if(i == 1){
-  #   print('running 60')
-  #   n=60 #group by 60 for both 1 and 2
-  #   sixty.listA <- list(paircombo.list[[1]], paircombo.list[[2]] , paircombo.list[[3]])
-  #   sixty.list <- lapply(sixty.listA, function(x) aggregate(.~ cbind(grp = as.integer(gl(nrow(x), n, nrow(x)))), x, mean)[-1])
-  #   for (dset in 1:length(sixty.listA)){
-  #     v.ntrade <- aggregate(sixty.listA[[dset]][,7],list(rep(1:(nrow(sixty.listA[[dset]])%/%n+1),each=n,len=nrow(sixty.listA[[dset]]))),sum)
-  #     v.volume <- aggregate(sixty.listA[[dset]][,5],list(rep(1:(nrow(sixty.listA[[dset]])%/%n+1),each=n,len=nrow(sixty.listA[[dset]]))),sum)
-  #     sixty.list[[dset]][,7] <- v.ntrade[1:nrow(sixty.list[[dset]]),2] #replace vol and ntrades
-  #     sixty.list[[dset]][,5] <- v.volume[1:nrow(sixty.list[[dset]]),2]       } #agg trades and vol
-  #   print('hr avrg fine')
-  #   for(dset in 1:length(sixty.list)){
-  #     sixty.list[[dset]] <- sixty.list[[dset]][complete.cases(sixty.list[[dset]]),]  }#remove NA
-  #   sixty.list <- FeatEng.list(sixty.list)#feat eng
-  #   print('feat eng fine')
-  #   for(dset in 1:length(sixty.list)){
-  #     sixty.list[[dset]] <- sixty.list[[dset]][complete.cases(sixty.list[[dset]]),]  }#remove NA
-  #   # for(s in 1:3){ #loop sending 1 pair at time to Ybuilder
-  #   templist <- Ybuilder.list(sixty.list, 60)#offset for Y, build dfs
-  #   print('Ys built fine')
-  #   for(s in 1:3){
-  #     finalsets[[s]] <- templist[[s]]  }  }   
- # if(i > 3 && i != 24){
     print(paste0('running 12 at num: ', i))
     n=12 #group by 12
-    # if(i == 18){
-    #   twelve.listA <- list(paircombo.list[[18]], paircombo.list[[24]])
-    # }else{    
       twelve.listA <- list()
       twelve.listA[[1]] <- paircombo.list[[i]] 
       twelve.listA[[2]] <- paircombo.list[[i]] 
-      #}
     print(paste0('length 12.list ', length(twelve.listA)))
     twelve.list <- lapply(twelve.listA, function(x) aggregate(.~ cbind(grp = as.integer(gl(nrow(x), n, nrow(x)))), x, mean)[-1])
     for (dset in 1:length(twelve.listA)){
@@ -388,91 +289,24 @@ for (i in 1:length(paircombo.list)){
     for(dset in 1:length(twelve.list)){  #remove NA
       twelve.list[[dset]] <- twelve.list[[dset]][complete.cases(twelve.list[[dset]]),]  }
     print('feat eng fine')
-    
-    #if(i != 18){
       temp6df <- Ybuilder.list(twelve.list, 12)#offset for Y, build dfs
       print(paste0('length temp6df: ', length(temp6df)))
       for(dset in 1:length(temp6df)){#clean NA again
         temp6df[[dset]] <- temp6df[[dset]][complete.cases(temp6df[[dset]]),]  }
       finalsets[[i]] <- temp6df   
-    #}
- }#add to finalsets list
-   # else{
-    #   print('its 18')
-    #   temp6df <- Ybuilder.list.singles(twelve.list, 12)#offset for Y, build dfs
-    #   print('Ys built fine')
-    #   for(ndf in 1:2){
-    #     for(dset in 1:length(temp6df[[1]][[ndf]])){#clean NA again
-    #       temp6df[[1]][[ndf]][[dset]] <- temp6df[[1]][[ndf]][[dset]][complete.cases(temp6df[[1]][[ndf]][[dset]]),]  }
-    #   }
-    #   finalsets[[i]] <- temp6df[[1]][[1]]   
-    #   finalsets[[24]] <- temp6df[[1]][[2]]
-    # }
-  #} 
+}
 
 finalsets11 <- finalsets
-#now combine ETHUSDT (1,4), BNBUSDT (2,5) BTCUSDTs (3,14)
-# for(i in 1:3){
-#   if(i == 1){
-#     for(j in 1:6){
-#       print(dim(finalsets2[[i]][[j]]))
-#       finalsets2[[i]][[j]] <- rbind(finalsets[[1]][[j]], finalsets[[4]][[j]])     }  }
-#   if(i == 2){
-#     for(j in 1:6){
-#       print(dim(finalsets2[[i]][[j]]))
-#       finalsets2[[i]][[j]] <- rbind(finalsets[[2]][[j]], finalsets[[5]][[j]])     }  }
-#   if(i == 3){
-#     for(j in 1:6){
-#       print(dim(finalsets2[[i]][[j]]))
-#       finalsets2[[i]][[j]] <- rbind(finalsets[[3]][[j]], finalsets[[13]][[j]])     }  }  }
-
-# finalsets11 <- list(finalsets2[[1]], finalsets2[[2]], finalsets2[[3]], finalsets2[[6]], finalsets2[[7]], finalsets2[[8]], finalsets2[[9]], finalsets2[[10]], finalsets2[[11]], finalsets2[[12]])#, finalsets2[[15]], finalsets2[[16]], finalsets2[[17]], finalsets2[[18]], finalsets2[[19]],# finalsets2[[20]], finalsets2[[21]], finalsets2[[22]], finalsets2[[23]], finalsets2[[24]])
 dfname.vector <- c('BNBUSDT', 'ETHUSDT', 'BNBBTC', 'ETHBTC', 'ADABTC', 'EOSBTC', 'IOTABTC', 'NEOBTC', 'TRXBTC', 'XLMBTC', 'BTCUSDT')#, 'BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
-
-
-
-# 
-# 
-# NLP.name <-  c('BCCBTC', 'ICXBTC', 'LTCBTC', 'NANOBTC', 'OMGBTC', 'ONTBTC', 'VENBTC', 'XMRBTC', 'XRPBTC', 'XEMBTC')
-# #get btc vectors
-# btc.sent <- fread('12.09.2018/NLPdump/BTCUSDT-NLP.csv')
-# btc.sent <- btc.sent[,2:3]
-# names(btc.sent) <- c('raw.sent.btc', 'comment.sent.btc')
-# print(paste0('btc length sent ', nrow(btc.sent)))
-# stop <- 0
-# 
-# for(pair in 12:21){  #this will have to loop over all 10 pairs and all 6df fro each
-#   #get sentvectors
-#   print(NLP.name[(pair-11)])
-#   pair.sent <- fread(paste0('12.09.2018/NLPdump/', NLP.name[(pair-11)], '-NLP.csv'))
-#   pair.sent <- pair.sent[,2:3]
-#   print(paste0('pair length sent ', nrow(pair.sent)))
-#   
-#   for(frame in 1:6){
-#     #add sentiment x2,  #add btc sentiment x2
-#     print(paste0('pair data length ', nrow(finalsets11[[pair]][[frame]])))
-#     smallest <- min(c(nrow(btc.df), nrow(pair.sent), nrow(btc.sent), nrow(finalsets11[[pair]][[frame]])))
-#     btc.df <- finalsets11[[3]][[frame]][,c(5,6,8,30,32,47)]
-#     names(btc.df) <- c('btc.price', 'btc.volume', 'btc.ntrade', 'btc.price.12h', 'btc.volume.12h', 'btc.RSI.12h')
-#     finalsets11[[pair]][[frame]] <- cbind(finalsets11[[pair]][[frame]][((nrow(finalsets11[[pair]][[frame]])-smallest)+1):nrow(finalsets11[[pair]][[frame]]),], pair.sent[((nrow(pair.sent)-smallest)+1):nrow(pair.sent),], btc.sent[((nrow(btc.sent)-smallest)+1):nrow(btc.sent),])
-#     #btc price  #btc volume  ntrade #12hr btc price  #12 hr btc volume  #12hr btc RSI
-#     print('sent added fine')
-#     finalsets11[[pair]][[frame]] <- cbind(finalsets11[[pair]][[frame]], btc.df[((nrow(btc.df)-smallest)+1):nrow(btc.df),])#owr::cbind.fill(finalsets11[[pair]][[frame]], btc.df[(nrow()-):,])
-#     finalsets11[[pair]][[frame]] <- finalsets11[[pair]][[frame]][complete.cases(finalsets11[[pair]][[frame]]),] 
-#   }
-# }
-# 
-# 
-
 
 
 #write csvs
 for(Npair in 1:11){
   for(frame in 1:6){
     #build csv file name
-    csvname <- paste0('/home/polabs1/Crypto/12.09.2018/datasets/', dfname.vector[Npair], '-a', frame, '.csv')
+    csvname <- paste0('/home/polabs1/Crypto/12.09.2018/test sets/', dfname.vector[Npair], '-a', frame, '.csv')
     #save
-    fwrite(finalsets11[[Npair]][[frame]], file=csvname)
+    fwrite(as.data.frame(finalsets11[[Npair]][frame]), file=csvname)
   }
 }
 
@@ -480,14 +314,15 @@ for(Npair in 1:11){
 
 
 
+ # library(ggplot2)
+ # ggplot(data=as.data.frame(finalsets11[[11]][1]), aes(x=1:nrow(as.data.frame(finalsets11[[11]][1])), y=as.data.frame(finalsets11[[11]][1])[,4]   )) +
+ #     geom_line()+
+ #     geom_point()
 
 
 
 
 
- 
- 
- library(ggplot2)
- ggplot(data=as.data.frame(finalsets11[[11]][1]), aes(x=1:nrow(as.data.frame(finalsets11[[11]][1])), y=as.data.frame(finalsets11[[11]][1])[,4]   )) +
-     geom_line()+
-     geom_point()
+
+
+

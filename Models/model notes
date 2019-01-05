@@ -1,0 +1,3 @@
+SVM parameters:
+  cost (C): low is less penality of error term (generalizes better), higher C will overfit/stricter - uses more hyperplanes
+  gamma: degree of influence of single training example, low is neighborhood, high is far

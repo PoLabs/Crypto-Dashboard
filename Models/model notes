@@ -1,3 +1,8 @@
+
+Shuffling data: generally a good idea with independent samples
+  Timeseries: generally don't shuffle, but can use out of sample for test OR multi train/test splits
+    - https://machinelearningmastery.com/backtest-machine-learning-models-time-series-forecasting/
+
 SVM parameters:
   cost (C): low is less penality of error term (generalizes better), higher C will overfit/stricter - uses more hyperplanes
     - C is 1 by default, consider decreasing it if there's many noisy observations

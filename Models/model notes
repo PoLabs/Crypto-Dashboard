@@ -1,4 +1,9 @@
 
+Preprocessing data:
+  Normalize: transforms data to between 0 and 1 (divides vector by length)
+  Standardize: transforms data to mean of 0 and SD of 1 (subtract mean than divide by its SD)
+  Center: removes some confounding?
+
 Shuffling data: generally a good idea with independent samples
   Timeseries: generally don't shuffle, but can use out of sample for test OR multi train/test splits
     - https://machinelearningmastery.com/backtest-machine-learning-models-time-series-forecasting/

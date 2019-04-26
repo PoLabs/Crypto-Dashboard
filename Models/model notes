@@ -30,3 +30,7 @@ Type I error: false positive - claiming something happened when it didn't
 Type II error: false negative -claiming nothing happened when it did
 Fourier transform: generic method to decompose generic functions into a superposition of symmetric functions
   - finds the set of cycle speeds, amplitudes and phases to match any time series
+  
+  
+  tips+tricks:
+  https://karpathy.github.io/2019/04/25/recipe/

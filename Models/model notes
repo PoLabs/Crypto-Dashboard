@@ -25,7 +25,7 @@ Recall: true positive rate- amout of positives model claims compared to actual n
 Precision: positive predictive value -amout of accurate positives model claims compared to number positives model actually claims
 ROC curve: graph representation of contrast between true positive rate and false positive rate at various thresholds
 L1 regularization: Laplacean prior, more binary/sparse with many variables being assigned 0 or 1
-L2 regularization: gaussian prior, tends to spread error among all terms
+L2 regularization: gaussian prior, tends to spread error among all terms (more typical)
 Type I error: false positive - claiming something happened when it didn't
 Type II error: false negative -claiming nothing happened when it did
 Fourier transform: generic method to decompose generic functions into a superposition of symmetric functions

@@ -1,0 +1,26 @@
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v1/klines?symbol=NEOBTC&interval=5m'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v1/depth?symbol=NEOBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=NEOBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v1/klines?symbol=ETHBTC&interval=5m'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v1/depth?symbol=ETHBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=ETHBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=5m'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v1/depth?symbol=BTCUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=BTCUSDT'
+
+*/2 * * * * aws s3 sync /home/ubuntu/NEO s3://polabs-datasets/NEO/new
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v1/klines?symbol=NEOUSDT&interval=5m'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v1/depth?symbol=NEOUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=NEOUSDT'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v1/klines?symbol=ETHUSDT&interval=5m'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v1/depth?symbol=ETHUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=ETHUSDT'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=5m'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v1/depth?symbol=BTCUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/NEO-USDT 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=BTCUSDT'
+

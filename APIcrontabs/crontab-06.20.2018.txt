@@ -1,0 +1,79 @@
+
+
+
+#BTC-USDT, ETH-USDT, BNB-USDT, ETH-BTC, BNB-BTC
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BTCUSDT/raw 'https://api.binance.com/api/v1/klines?symbol=BTCUSDT&inter$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BTCUSDT/raw 'https://api.binance.com/api/v1/depth?symbol=BTCUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BTCUSDT/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=BT$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BTCUSDT/raw 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBUSDT/raw 'https://api.binance.com/api/v1/klines?symbol=BNBUSDT&inter$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBUSDT/raw 'https://api.binance.com/api/v1/depth?symbol=BNBUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBUSDT/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=BN$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBUSDT/raw 'https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBBTC/raw 'https://api.binance.com/api/v1/klines?symbol=BNBBTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBBTC/raw 'https://api.binance.com/api/v1/depth?symbol=BNBBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBBTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=BNB$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/BNBBTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=BNBBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHBTC/raw 'https://api.binance.com/api/v1/klines?symbol=ETHBTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHBTC/raw 'https://api.binance.com/api/v1/depth?symbol=ETHBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHBTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=ETH$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHBTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=ETHBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHUSDT/raw 'https://api.binance.com/api/v1/klines?symbol=ETHUSDT&inter$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHUSDT/raw 'https://api.binance.com/api/v1/depth?symbol=ETHUSDT'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHUSDT/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=ET$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ETHUSDT/raw 'https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT'
+
+
+
+#BTCs: ADA XLM NEO IOTA EOS TRX
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ADABTC/raw 'https://api.binance.com/api/v1/klines?symbol=ADABTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ADABTC/raw 'https://api.binance.com/api/v1/depth?symbol=ADABTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ADABTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=ADA$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/ADABTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=ADABTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/XLMBTC/raw 'https://api.binance.com/api/v1/klines?symbol=XLMBTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/XLMBTC/raw 'https://api.binance.com/api/v1/depth?symbol=XLMBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/XLMBTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=XLM$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/XLMBTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=XLMBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/NEOBTC/raw 'https://api.binance.com/api/v1/klines?symbol=NEOBTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/NEOBTC/raw 'https://api.binance.com/api/v1/depth?symbol=NEOBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/NEOBTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=NEO$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/NEOBTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=NEOBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/IOTABTC/raw 'https://api.binance.com/api/v1/klines?symbol=IOTABTC&inter$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/IOTABTC/raw 'https://api.binance.com/api/v1/depth?symbol=IOTABTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/IOTABTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=IO$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/IOTABTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=IOTABTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/EOSBTC/raw 'https://api.binance.com/api/v1/klines?symbol=EOSBTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/EOSBTC/raw 'https://api.binance.com/api/v1/depth?symbol=EOSBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/EOSBTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=EOS$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/EOSBTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=EOSBTC'
+
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/TRXBTC/raw 'https://api.binance.com/api/v1/klines?symbol=TRXBTC&interva$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/TRXBTC/raw 'https://api.binance.com/api/v1/depth?symbol=TRXBTC'
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/TRXBTC/raw 'https://api.binance.com/api/v3/ticker/bookTicker?symbol=TRX$
+*/5 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/TRXBTC/raw 'https://api.binance.com/api/v3/ticker/price?symbol=TRXBTC'
+
+
+
+*/6 * * * * /usr/bin/Rscript "/home/ubuntu/cryptoAPI/updater-06.21.2018.R"
+#3-59/6 * * * * /usr/bin/Rscript "/home/ubuntu/cryptoAPI/updater-2pairs.R"
+
+
+1-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/BTCUSDT/CSV s3://polabs-datasets/binance-BTCUSDT --recursive
+2-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/ETHUSDT/CSV s3://polabs-datasets/binance-ETHUSDT --recursive
+3-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/BNBUSDT/CSV s3://polabs-datasets/binance-BNBUSDT --recursive
+4-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/ADABTC/CSV s3://polabs-datasets/binance-ADABTC --recursive
+5-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/BNBBTC/CSV s3://polabs-datasets/binance-BNBBTC --recursive
+6-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/EOSBTC/CSV s3://polabs-datasets/binance-EOSBTC --recursive
+7-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/ETHBTC/CSV s3://polabs-datasets/binance-ETHBTC --recursive
+1-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/IOTABTC/CSV s3://polabs-datasets/binance-IOTABTC --recursive
+2-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/NEOBTC/CSV s3://polabs-datasets/binance-NEOBTC --recursive
+3-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/TRXBTC/CSV s3://polabs-datasets/binance-TRXBTC --recursive
+4-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/XLMBTC/CSV s3://polabs-datasets/binance-XLMBTC --recursive

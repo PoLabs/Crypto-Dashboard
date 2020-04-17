@@ -39,6 +39,7 @@ feat.engineer <- function(PAIRdata){
   PAIRdata$MACDspreadE <- MACDspreadE[,1] 
   return(PAIRdata) 
 }#feature engineering
+
 Ybuilder.list <- function(pair.df){   #a list of X dfs in 
   money5 <- as.double(0.005)
   money1 <- as.double(0.01)

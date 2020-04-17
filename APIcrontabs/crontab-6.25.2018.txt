@@ -1,0 +1,27 @@
+
+
+
+
+
+0 * * * * wget --content-disposition --restrict-file-names=windows -P /home/ubuntu/cryptoAPI/NLP/raw 'https://www.reddit.com/r/CryptoCurrency/hot.json?limit=100'
+
+12-59/20 * * * * /usr/bin/Rscript "home/ubuntu/cryptoAPI/NLP/NLPupdater.R"
+*/6 * * * * /usr/bin/Rscript "/home/ubuntu/cryptoAPI/updater-06.21.2018.R"
+3-59/6 * * * * /usr/bin/Rscript "/home/ubuntu/cryptoAPI/updater-2pairs.R"
+
+
+1-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/BTCUSDT/CSV s3://polabs-datasets/binance-BTCUSDT --recursive
+2-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/ETHUSDT/CSV s3://polabs-datasets/binance-ETHUSDT --recursive
+3-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/BNBUSDT/CSV s3://polabs-datasets/binance-BNBUSDT --recursive
+4-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/ADABTC/CSV s3://polabs-datasets/binance-ADABTC --recursive
+5-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/BNBBTC/CSV s3://polabs-datasets/binance-BNBBTC --recursive
+6-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/EOSBTC/CSV s3://polabs-datasets/binance-EOSBTC --recursive
+7-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/ETHBTC/CSV s3://polabs-datasets/binance-ETHBTC --recursive
+1-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/IOTABTC/CSV s3://polabs-datasets/binance-IOTABTC --recursive
+2-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/NEOBTC/CSV s3://polabs-datasets/binance-NEOBTC --recursive
+3-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/TRXBTC/CSV s3://polabs-datasets/binance-TRXBTC --recursive
+4-59/8 * * * * /home/ubuntu/.local/bin/aws s3 cp /home/ubuntu/cryptoAPI/XLMBTC/CSV s3://polabs-datasets/binance-XLMBTC --recursive
+
+*/15 * * * * /home/ubuntu/.local/bin/aws s3 sync /home/ubuntu/cryptoAPI/NLP/current s3://polabs-datasets/reddit-crypto-NLP --recursive
+
+

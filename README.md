@@ -3,20 +3,10 @@
 Crypto-Dashboard.net
 
 Structure:
-- Dashboard: Shiny ui and server files
-- Models: csv creation, Y frame creation, ML modeling, accuracy testing
-- API callers: manage data from calls to crypto exchange APIs
-- NLP: manage data from calls to social media
+- Dashboard: Shiny dashboard UI and server files
+- Models: dataset creation, machine learning modeling, accuracy testing
+- API callers: scape data from crypto exchange APIs
+- NLP: scrape data from crypto social media accounts
 
 contact:
 polabs@protonmail.com
-
-
-
-
-Training work flow:
-1. get data
-    - smallcsv, tracker --> local dir
-    
-    
-    

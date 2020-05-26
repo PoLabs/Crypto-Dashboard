@@ -8,5 +8,13 @@ Structure:
 - API callers: scape data from crypto exchange APIs
 - NLP: scrape data from crypto social media accounts
 
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ClinTrials.gov database:
+<center><img src='cdash.png'></img></center>
+
+
 contact:
-polabs@protonmail.com
+vpisano@polabs.net
+
+
